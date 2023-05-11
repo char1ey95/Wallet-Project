@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./build",
+        "module": "CommonJS",
+        "esModuleInterop": true,
+        "target": "ES6",
+        "strict": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@main/*":["main/*"],
+            "@auth/*":["auth/*"],
+            "@users/*":["users/*"]
+        }
+    }
+}
