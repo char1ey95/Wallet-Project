@@ -1,8 +1,10 @@
-import { MainForm } from './common/form/MainForm'
+import styled from 'styled-components'
 
 const App = () => {
 	return (
-		<MainForm />
+		<>
+		
+		</>
 	)
 }
 
