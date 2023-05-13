@@ -1,7 +1,8 @@
+import Express from "express"
+
 class App {
-    public express: Express
     private port: number | string
-    constructor() {
+    constructor(private readonly express: Express) {
         this.express = express()
         this.port = config.port
     }

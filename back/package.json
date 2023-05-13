@@ -42,7 +42,7 @@
     "preset": "ts-jest",
     "testEnvironment": "node",
     "moduleNameMapper": {
-      "^@(main|auth|users)/(.+)$": "<rootDir>/src/$1/$2"
+      "^@(main|auth|users|accounts)/(.+)$": "<rootDir>/src/$1/$2"
     }
   }
 }

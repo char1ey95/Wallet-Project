@@ -7,8 +7,7 @@
         "strict": true,
         "baseUrl": "./src",
         "paths": {
-            "@main/*":["main/*"],
-            "@auth/*":["auth/*"],
+            "@accounts/*":["accounts/*"],
             "@users/*":["users/*"]
         }
     }
