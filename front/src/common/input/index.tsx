@@ -1,1 +1,1 @@
-export * from "./DarkInput"
+export * from "./DarkInput.styled"

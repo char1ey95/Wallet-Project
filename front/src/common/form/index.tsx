@@ -1,1 +1,1 @@
-export * from "./MainForm"
+export * from "./MainForm.styled"
