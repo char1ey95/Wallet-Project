@@ -9,23 +9,36 @@ const LoginHeaderWrapper = styled.header`
     box-sizing: border-box;
 `
 
-const LoginHeaderIconWrap = styled.div`
+const LoginHeaderIcon = styled.div`
     width: 100%;
     height: 3.5rem;
     & > svg {
         color: #FFFFFF;
         font-size: 3.5rem;
         background-color: ${props => props.theme.yellow.color};
-        border-radius: 0.5rem;
+        border-radius: 0.75rem;
     }
+`
+
+const LoginHeaderMainContent = styled.h2`
+    margin-top: 1rem;
+    font-family: 'Gmarket';
+`
+
+const LoginHeaderSubContent = styled.h3`
+    margin-top: 0.5rem;
+    font-family: 'Gmarket';
+    color: #9c9c9c;
 `
 
 export const LoginHeader = () => {
     return(
         <LoginHeaderWrapper>
-            <LoginHeaderIconWrap>
+            <LoginHeaderIcon>
                 <Icon icon={'material-symbols:account-balance-wallet'}></Icon>
-            </LoginHeaderIconWrap>
+            </LoginHeaderIcon>
+            <LoginHeaderMainContent>Char1ies Wallet</LoginHeaderMainContent>
+            <LoginHeaderSubContent>Extension</LoginHeaderSubContent>
         </LoginHeaderWrapper>
     )
 }
