@@ -1,15 +1,11 @@
-import { Icon } from '@iconify/react'
-import { CircleBtn } from '../../common/button'
+import { MainForm } from '../../common/form'
+import { AssetsHeader, AssetsContents } from './styled'
 
-const Assets = () => {
+export const Assets = () => {
     return(
         <>
-            <CircleBtn>
-				<Icon icon={"ic:baseline-arrow-upward"}></Icon>
-			</CircleBtn>
-			<CircleBtn>
-				<Icon icon={"ic:baseline-arrow-downward"}></Icon>
-			</CircleBtn>
+            <AssetsHeader />
+            <AssetsContents />
         </>
     )
 }

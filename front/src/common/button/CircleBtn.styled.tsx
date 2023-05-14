@@ -8,6 +8,7 @@ export const CircleBtn = styled.button`
     border-radius: 50%;
     background-color: ${props => props.theme.yellow.color};
     font-size: 2rem;
+    color: #000;
     border: none;
 
     &:hover, &:hover .iconify{

@@ -5,6 +5,9 @@ export const GlobalTheme = ({ children }) => {
     yellow: {
       color: "#FFD700",
       hover: "#FFAF00",
+    },
+    black: {
+      color: "#000000"
     }
   }
   
