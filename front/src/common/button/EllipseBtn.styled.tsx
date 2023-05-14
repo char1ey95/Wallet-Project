@@ -6,11 +6,11 @@ export const EllipseBtn = styled.button`
     height: 4rem;
     font-weight: 700;
     font-size: 1.5rem;
-    background-color: ${props => props.color};
+    background-color: ${props => props.theme.yellow.color};
     border: none;
 	border-radius: 2rem;
 
     &:hover{
-        background-color: ${props => props.color};
+        background-color: ${props => props.theme.yellow.hover};
     }
 `
