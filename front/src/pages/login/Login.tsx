@@ -1,10 +1,11 @@
 import { MainForm } from '../../common/form'
-import { LoginHeader } from './styled'
+import { LoginBox, LoginHeader } from './styled'
 
 export const Login = () => {
     return(
         <MainForm>
             <LoginHeader />
+            <LoginBox></LoginBox>
         </MainForm>
     )
 }
