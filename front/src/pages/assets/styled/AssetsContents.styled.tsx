@@ -1,15 +1,29 @@
 import { Icon } from '@iconify/react'
 import { CircleBtn } from '../../../common/button'
+import styled from 'styled-components'
 
-export const AssetsContents = () => {
+const AssetsAmountsWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 25%;
+`
+
+const AssetsAmount = styled.h1`
+	color: #fff;
+`
+
+export const AssetsAmounts = () => {
 	return (
-		<>
-			<CircleBtn>
+		<AssetsAmountsWrapper>
+			<AssetsAmount>$10.05</AssetsAmount>
+			{/* <CircleBtn>
 				<Icon icon={"ic:baseline-arrow-upward"}></Icon>
 			</CircleBtn>
 			<CircleBtn>
 				<Icon icon={"ic:baseline-arrow-downward"}></Icon>
-			</CircleBtn>
-		</>
+			</CircleBtn> */}
+		</AssetsAmountsWrapper>
 	)
 }

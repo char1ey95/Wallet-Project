@@ -1,11 +1,12 @@
 import { MainForm } from '../../common/form'
-import { AssetsHeader, AssetsContents } from './styled'
+import { AssetsHeader, AssetsAmounts, AssetsFunctions } from './styled'
 
 export const Assets = () => {
     return(
         <>
             <AssetsHeader />
-            <AssetsContents />
+            <AssetsAmounts />
+            <AssetsFunctions />
         </>
     )
 }

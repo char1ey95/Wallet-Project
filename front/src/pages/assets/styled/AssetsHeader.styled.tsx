@@ -32,9 +32,14 @@ const AssetsHeaderAccountBtnWarp = styled.div`
     justify-content: right;
     width: 40%;
     height: 100%;
+    
     & > button {
         cursor: pointer;
-        margin-right: 0.5rem;
+        margin-right: 0.25rem;
+    }
+
+    & > button:hover {
+        color: #737373;
     }
 `
 
@@ -46,6 +51,13 @@ const AssetsHeaderAccountCopyBtn = styled.button`
 `
 
 const AssetsHeaderAccountAddBtn = styled.button`
+    width: 2rem;
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: none;
+`
+
+const AssetsHeaderAccountCancelBtn = styled.button`
     width: 2rem;
     font-size: 1.5rem;
     background-color: transparent;
@@ -79,6 +91,9 @@ export const AssetsHeader = () => {
                     <AssetsHeaderAccountAddBtn>
                         <Icon icon={'material-symbols:add-card-outline'}></Icon>
                     </AssetsHeaderAccountAddBtn>
+                    <AssetsHeaderAccountCancelBtn>
+                        <Icon icon={'material-symbols:cancel'}></Icon>
+                    </AssetsHeaderAccountCancelBtn>
                 </AssetsHeaderAccountBtnWarp>
             </AssetsHeaderContents>
         </AssetsHeaderWrap>
