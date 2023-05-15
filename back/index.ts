@@ -1,1 +1,0 @@
-import middleWares from './middlewares'

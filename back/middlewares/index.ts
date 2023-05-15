@@ -1,12 +1,3 @@
-import jsonParser from './bodyParser/jsonParser'
-import setCookieParser from './cookieParser'
-import setCors from './cors'
-
-
-const middleWares = {
-    jsonParser,
-    setCookieParser,
-    setCors,
-}
+const middleWares = {}
 
 export default middleWares

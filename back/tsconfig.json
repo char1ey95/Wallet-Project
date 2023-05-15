@@ -7,8 +7,8 @@
         "strict": true,
         "baseUrl": "./src",
         "paths": {
-            "@accounts/*":["accounts/*"],
-            "@users/*":["users/*"]
+            "@crypto/*":["crypto/*"],
+            "@wallet/*":["wallet/*"]
         }
     }
 }
