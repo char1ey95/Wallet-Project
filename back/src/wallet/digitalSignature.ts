@@ -2,11 +2,27 @@ import { randomBytes } from "crypto"
 import elliptic from "elliptic"
 import CryptoModule from 'crypto/crypto'
 import { Receipt } from "./wallet.interface"
+import * as bip39 from 'bip39'
 
 class DigitalSignature {
     private readonly ec = new elliptic.ec("secp256k1")
 
     constructor(private readonly crypto: CryptoModule) {}
+
+    createMnemonic() {
+        bip39.setDefaultWordlist("korean")
+        const bits = 128
+        const randomBytes = require("crypto").randomBytes(bits/8)
+        const entropy = randomBytes.toString("hex")
+        const mnemonic = bip39.entropyToMnemonic(entropy)
+
+        return mnemonic
+    }
+
+    createPrivateKeyByMnemonic(mnemonic: string) {
+        const privateKey = this.crypto.SHA256(mnemonic)
+        return privateKey
+    }
 
     createPrivateKey() {
         return randomBytes(32).toString("hex")
