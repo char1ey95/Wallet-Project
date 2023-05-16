@@ -9,7 +9,8 @@ class App {
 
     public listen(port: number | string): void {
         this.app.listen(port, () => {
-            console.log(`SERVER_PORT:${port} start`)
+            console.log(`SERVER_PORT:${port}`)
+            console.log(`SERVER START`)
         })
     }
 }
