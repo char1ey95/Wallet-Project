@@ -16,7 +16,7 @@ const AssetsAmount = styled.h1`
 
 export const AssetsAmounts = () => {
 	const {selectedAccount} = useSelector((state: RootState) => state.accounts)
-
+	console.log(selectedAccount)
 	return (
 		<AssetsAmountsWrapper>
 			<AssetsAmount>{selectedAccount.balance} ETH</AssetsAmount>

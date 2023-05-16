@@ -11,10 +11,10 @@ export interface AccountState {
 }
 
 export interface SelectedAccount {
-    account?: account
-    balance?: balance
-    privateKey?: privateKey
-    publicKey?: publicKey
+    account: account
+    balance: balance
+    privateKey: privateKey
+    publicKey: publicKey
 }
 
 export interface InitialState {
@@ -24,6 +24,4 @@ export interface InitialState {
     selectedAccount: SelectedAccount
 }
 
-export interface AccountsPayload {
-
-}
+export type AccountsPayload = AccountState | SelectedAccount | InitialState

@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { EllipseBtn } from '../../../common/button'
 import { DarkInput } from '../../../common/input'
+import request from "../../../utils/request"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../store/rootState"
+import { MouseEvent } from 'react'
 
 const AssetsFunctionsWrapper = styled.form`
     display: flex;
@@ -20,11 +24,27 @@ const AssetsFunctionsWrapper = styled.form`
 `
 
 export const AssetsFunctions = () => {
-    return(
+    const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
+
+    const mineBlock = async () => {
+        try {
+            const { data } = await request.post('/mineBlock', { account: selectedAccount.account })
+            console.log(data)
+            alert('블럭이 생성되었습니다!')
+        } catch (e) {
+            alert('블럭을 생성하지 못하였습니다!')
+        }
+    }
+
+    const handleClickMine = (e: MouseEvent) => {
+        mineBlock()
+    }
+
+    return (
         <AssetsFunctionsWrapper>
-            <DarkInput placeholder='송금할 계좌를 입력해주세요'/>
-            <EllipseBtn>송금하기</EllipseBtn> 
-            <EllipseBtn>채굴하기</EllipseBtn>
+            <DarkInput placeholder='송금할 계좌를 입력해주세요' />
+            <EllipseBtn type="submit">송금하기</EllipseBtn>
+            <EllipseBtn type="button" onClick={handleClickMine}>채굴하기</EllipseBtn>
         </AssetsFunctionsWrapper>
     )
 }

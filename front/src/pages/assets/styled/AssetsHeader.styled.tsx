@@ -83,8 +83,7 @@ interface AssetHeaderProps {
 }
 
 export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen }) => {
-	const { accounts } = useSelector((state: RootState) => state.accounts);
-
+	const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
 	const handleClickSelected = (e: MouseEvent) => {
 		setOpen(!open)
 	}
@@ -95,7 +94,7 @@ export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen }) => {
 				<AssetsHeaderAccountsList onClick={handleClickSelected}>
 					<AssetsHeaderAccountsIcon src="default.png" />
 					<AssetsHeaderAccountsName>
-						{accounts[0].account.substring(0,6) + '...' + accounts[0].account.substring(36,40)}
+						{selectedAccount.account.substring(0,6) + '...' + selectedAccount.account.substring(36,40)}
 					</AssetsHeaderAccountsName>
 				</AssetsHeaderAccountsList>
 				<AssetsHeaderAccountBtnWarp>
