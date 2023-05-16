@@ -20,24 +20,15 @@ const initialState: InitialState = {
 	}
 };
 
-export const accounts = (
-	state = initialState,
-	action: { type: string; payload: any }
-) => {
+export const accounts = (state = initialState, action: { type: string; payload: any }) => {
 	switch (action.type) {
 		case GET_ACCOUNT_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
 				isError: null,
-				accounts: [
-					{
-						account: action.payload.account,
-						balance: 0,
-						privateKey: action.payload.privateKey,
-						publicKey: action.payload.publicKey
-					},
-				],
+				accounts: [],
+				selectedAccount: []
 			};
 		default:
 			return state;

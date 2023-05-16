@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { QRCodeSVG } from "qrcode.react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/rootState";
 
 const PopupWrap = styled.div`
 	position: absolute;
@@ -33,7 +35,7 @@ const PopupHeaderName = styled.h1`
 const PopupContents = styled.div`
     width: 100%;
     min-height: 3rem;
-    max-height: 15rem;
+    max-height: 9rem;
     overflow: auto;
 `
 const PopupContentWrap = styled.div`
@@ -51,26 +53,22 @@ const PopupContent = styled.div`
 `
 
 export const Popup = () => {
-    const accounts = [
-        "abdsad...asdd",
-        "1e5e4r...ae1f",
-        "2e00x0...asdd",
-    ]
-	return (
-		<PopupWrap>
-			<PopupHeader>
+    const { accounts } = useSelector((state: RootState) => state.accounts)
+    return (
+        <PopupWrap>
+            <PopupHeader>
                 <PopupHeaderName>Accounts</PopupHeaderName>
             </PopupHeader>
             <PopupContents>
-                {accounts.map((account: string, index) => {
-                    return(
-                        <PopupContentWrap>
-                            <QRCodeSVG value={account} width="24" height="24"></QRCodeSVG>
-                            <PopupContent>{account}</PopupContent>
+                {accounts.map((account, index) => {
+                    return (
+                        <PopupContentWrap key={index}>
+                            <QRCodeSVG value={account.account} width="24" height="24"></QRCodeSVG>
+                            <PopupContent>{account.account}</PopupContent>
                         </PopupContentWrap>
                     )
                 })}
             </PopupContents>
-		</PopupWrap>
-	);
+        </PopupWrap>
+    );
 };

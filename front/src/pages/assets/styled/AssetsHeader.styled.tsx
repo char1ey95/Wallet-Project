@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import styled from "styled-components";
 import { RootState } from "../../../store/rootState";
 import { useSelector } from "react-redux";
-import { MouseEvent } from "react";
+import React, { MouseEvent } from "react";
 
 const AssetsHeaderWrap = styled.header`
 	width: 100%;
@@ -77,26 +77,22 @@ const AssetsHeaderContents = styled.div`
 	box-sizing: border-box;
 `;
 
-export const AssetsHeader = () => {
+interface AssetHeaderProps {
+	open: boolean
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen }) => {
 	const { accounts } = useSelector((state: RootState) => state.accounts);
 
-    const createAccount = async () => {
-        try {
-            
-        } catch (e) {
-            alert('계정생성에 실패하였습니다.')
-        }
-    }
+	const handleClickSelected = (e: MouseEvent) => {
+		setOpen(!open)
+	}
 
-    const handleCreateAccount = (e: MouseEvent) => {
-        e.preventDefault()
-
-    }
-    
 	return (
 		<AssetsHeaderWrap>
 			<AssetsHeaderContents>
-				<AssetsHeaderAccountsList>
+				<AssetsHeaderAccountsList onClick={handleClickSelected}>
 					<AssetsHeaderAccountsIcon src="default.png" />
 					<AssetsHeaderAccountsName>
 						{accounts[0].account.substring(0,6) + '...' + accounts[0].account.substring(36,40)}
@@ -106,7 +102,7 @@ export const AssetsHeader = () => {
 					<AssetsHeaderAccountCopyBtn>
 						<Icon icon={"material-symbols:content-copy"}></Icon>
 					</AssetsHeaderAccountCopyBtn>
-					<AssetsHeaderAccountAddBtn onClick={handleCreateAccount}>
+					<AssetsHeaderAccountAddBtn>
 						<Icon icon={"material-symbols:add-card-outline"}></Icon>
 					</AssetsHeaderAccountAddBtn>
 					<AssetsHeaderAccountCancelBtn>

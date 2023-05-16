@@ -23,3 +23,7 @@ export interface InitialState {
 	accounts: AccountState[]
     selectedAccount: SelectedAccount
 }
+
+export interface AccountsPayload {
+
+}
