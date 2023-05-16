@@ -10,6 +10,10 @@ const AssetsFunctionsWrapper = styled.form`
     width: 100%;
     height: 70%;
 
+    & > input {
+        margin-bottom: 1.5rem;
+    }
+
     & > button {
         margin-top: 2rem;
     }
@@ -19,8 +23,8 @@ export const AssetsFunctions = () => {
     return(
         <AssetsFunctionsWrapper>
             <DarkInput placeholder='송금할 계좌를 입력해주세요'/>
-            <EllipseBtn>Send</EllipseBtn>
-            <EllipseBtn>Cancel</EllipseBtn>
+            <EllipseBtn>송금하기</EllipseBtn> 
+            <EllipseBtn>채굴하기</EllipseBtn>
         </AssetsFunctionsWrapper>
     )
 }

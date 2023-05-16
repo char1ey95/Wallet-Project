@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { request } from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import App from './app'

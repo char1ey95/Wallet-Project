@@ -1,17 +1,29 @@
+import { InitialState } from "./account.interface";
 import { GET_ACCOUNT_SUCCESS } from "./types";
 
-const initialState = {
+const initialState: InitialState = {
 	isLoading: true,
 	isError: null,
 	accounts: [
 		{
 			account: "",
 			balance: 0,
+			privateKey: "",
+			publicKey: "",
 		},
 	],
+	selectedAccount: {
+		account: "",
+		balance: 0,
+		privateKey: "",
+		publicKey: "",
+	}
 };
 
-export const account = (state = initialState, action: { type: any; payload: any; }) => {
+export const accounts = (
+	state = initialState,
+	action: { type: string; payload: any }
+) => {
 	switch (action.type) {
 		case GET_ACCOUNT_SUCCESS:
 			return {
@@ -20,8 +32,10 @@ export const account = (state = initialState, action: { type: any; payload: any;
 				isError: null,
 				accounts: [
 					{
-						account: action.payload,
-						balance: action.payload,
+						account: action.payload.account,
+						balance: 0,
+						privateKey: action.payload.privateKey,
+						publicKey: action.payload.publicKey
 					},
 				],
 			};

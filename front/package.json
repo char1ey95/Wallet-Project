@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.4",
     "axios": "^1.4.0",
     "jest": "^29.5.0",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -56,5 +57,12 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@(common|pages|routes|store|styles|utils)/(.+)$": "<rootDir>/src/$1/$2"
+    }
   }
 }

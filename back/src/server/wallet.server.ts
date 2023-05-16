@@ -28,7 +28,7 @@ class WalletServer {
         }
     }
 
-    async postWallet(req: Request, res: Response) {
+    async createWallet(req: Request, res: Response) {
         try {
             const account = this.wallet.create()
             const { data: { balance } } = await this.axios.post(`/getBalance`, {
@@ -57,6 +57,16 @@ class WalletServer {
             res.json(tx.data)
         } catch (e) {
             if (e instanceof Error) res.status(500).send(e.message)
+            res.status(500)
+        }
+    }
+
+    async postMining(req: Request, res: Response){
+        try {
+            const { account } = req.body
+            const result = await this.axios.post('/mineBlock', { account })
+            res.json({ result })
+        } catch (e) {
             res.status(500)
         }
     }
