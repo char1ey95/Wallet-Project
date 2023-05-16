@@ -8,7 +8,9 @@
         "baseUrl": "./src",
         "paths": {
             "@crypto/*":["crypto/*"],
-            "@wallet/*":["wallet/*"]
+            "@wallet/*":["wallet/*"],
+            "@server/*":["server/*"],
+            "@utils/*":["utils/*"]
         }
     }
 }

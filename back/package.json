@@ -46,7 +46,7 @@
     "preset": "ts-jest",
     "testEnvironment": "node",
     "moduleNameMapper": {
-      "^@(crypto|wallet)/(.+)$": "<rootDir>/src/$1/$2"
+      "^@(crypto|wallet|utils|server)/(.+)$": "<rootDir>/src/$1/$2"
     }
   }
 }
