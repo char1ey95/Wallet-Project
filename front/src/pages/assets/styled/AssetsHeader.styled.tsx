@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { RootState } from "../../../store/rootState";
 import { useSelector } from "react-redux";
 import React, { MouseEvent } from "react";
+import { QRCodeSVG } from "qrcode.react";
 
 const AssetsHeaderWrap = styled.header`
 	width: 100%;
@@ -80,19 +81,25 @@ const AssetsHeaderContents = styled.div`
 interface AssetHeaderProps {
 	open: boolean
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+	newAccount: () => Promise<void>
 }
 
-export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen }) => {
+export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen, newAccount }) => {
 	const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
-	const handleClickSelected = (e: MouseEvent) => {
+
+	const handleClickOpen = (e: MouseEvent) => {
 		setOpen(!open)
+	}
+
+	const handleClickNewAccount = (e: MouseEvent) => {
+		newAccount()
 	}
 
 	return (
 		<AssetsHeaderWrap>
 			<AssetsHeaderContents>
-				<AssetsHeaderAccountsList onClick={handleClickSelected}>
-					<AssetsHeaderAccountsIcon src="default.png" />
+				<AssetsHeaderAccountsList onClick={handleClickOpen}>
+					<QRCodeSVG value={selectedAccount.account} width="24" height="24"></QRCodeSVG>
 					<AssetsHeaderAccountsName>
 						{selectedAccount.account.substring(0,6) + '...' + selectedAccount.account.substring(36,40)}
 					</AssetsHeaderAccountsName>
@@ -101,7 +108,7 @@ export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen }) => {
 					<AssetsHeaderAccountCopyBtn>
 						<Icon icon={"material-symbols:content-copy"}></Icon>
 					</AssetsHeaderAccountCopyBtn>
-					<AssetsHeaderAccountAddBtn>
+					<AssetsHeaderAccountAddBtn onClick={handleClickNewAccount}>
 						<Icon icon={"material-symbols:add-card-outline"}></Icon>
 					</AssetsHeaderAccountAddBtn>
 					<AssetsHeaderAccountCancelBtn>

@@ -5,7 +5,7 @@ export type publicKey = string
 
 export interface AccountState {
     account: account
-    balance: balance
+    balance?: balance
     privateKey: privateKey
     publicKey: publicKey
 }
@@ -24,4 +24,4 @@ export interface InitialState {
     selectedAccount: SelectedAccount
 }
 
-export type AccountsPayload = AccountState | SelectedAccount | InitialState
+export type AccountsPayload = AccountState | SelectedAccount | InitialState | AccountState[]

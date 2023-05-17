@@ -13,6 +13,7 @@ describe('DigitalSignature', () => {
     describe('createMnemonic', () => {
         it("니모닉의 단어 갯수가 12개인가", () => {
             const mnemonic = digitalSignature.createMnemonic()
+            console.log(mnemonic)
             expect(mnemonic.split(" ").length).toBe(12)
         })
     })

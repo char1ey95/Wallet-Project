@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { QRCodeSVG } from "qrcode.react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/rootState";
+import { MouseEvent, useState } from "react";
+import { selectAccount } from "../../store/account";
+import { AccountState, account } from "../../store/account/account.interface";
+import request from "../../utils/request";
 
 const PopupWrap = styled.div`
 	position: absolute;
@@ -52,19 +56,45 @@ const PopupContent = styled.div`
     font-size: 1.5rem;
 `
 
-export const Popup = () => {
-    const { accounts } = useSelector((state: RootState) => state.accounts)
+interface PopupProps {
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Popup: React.FC<PopupProps> = ({setOpen}) => {
+    const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts)
+    const [balance, setBalance] = useState({})
+    const dispatch = useDispatch()
+
+    const getBalance = async (account: account) => {
+        try {
+            const { data } = await request.get(`/balance/${account}`)
+            setBalance(data)
+        } catch (e) {
+            
+        }
+    }
+
+    const handleClickSelectAccount = (e: MouseEvent) => {
+        const account = e.target as HTMLElement
+        const findValue = account.innerHTML.substring(0, 6)
+        const [selectOne] = accounts.filter((v) => v.account.substring(0, 6) === findValue)
+        getBalance(selectOne.account)
+        dispatch(selectAccount(balance))
+        setOpen(false)
+    }
+
     return (
         <PopupWrap>
             <PopupHeader>
                 <PopupHeaderName>Accounts</PopupHeaderName>
             </PopupHeader>
-            <PopupContents>
+            <PopupContents onClick={handleClickSelectAccount}>
                 {accounts.map((account, index) => {
+                    if (index === 0 && account.account.length === 0) return <input type="hidden" key={index}></input>
                     return (
                         <PopupContentWrap key={index}>
                             <QRCodeSVG value={account.account} width="24" height="24"></QRCodeSVG>
-                            <PopupContent>{account.account}</PopupContent>
+                            <PopupContent>{account.account.substring(0, 12)}...{account.account.substring(36, 40)}</PopupContent>
                         </PopupContentWrap>
                     )
                 })}

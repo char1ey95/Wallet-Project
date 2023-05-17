@@ -3,8 +3,9 @@ import { Popup } from "../../common/popup"
 import { useEffect, useState } from "react"
 import request from "../../utils/request"
 import { useDispatch, useSelector } from "react-redux"
-import { createAccount } from "../../store/account"
+import { createAccount, getAccounts } from "../../store/account"
 import { RootState } from "../../store/rootState"
+import { account } from "../../store/account/account.interface"
 
 export const Assets = () => {
 	const [open, setOpen] = useState(false)
@@ -12,18 +13,32 @@ export const Assets = () => {
 	const dispatch = useDispatch()
 
 	const newAccount = async () => {
-		const { data } = await request.get('/wallet')
-		dispatch(createAccount(data))
+		try {
+			const { data } = await request.get('/wallet')
+			dispatch(createAccount(data))
+		} catch (e) {
+			// dispatch()
+		}
+	}
+
+	const searchAccount = async () => {
+		try {
+			const { data } = await request.get('/allWallet')
+			dispatch(getAccounts(data.accountsList))
+		} catch (e) {
+			
+		}
 	}
 
 	useEffect(() => {
-		if( accounts[0].account === '' ) newAccount()
+		// searchAccount()
+		if( accounts.length === 1) newAccount()
 	}, [])
 
 	return (
 		<>
-			{open ? <Popup /> : <></>}
-			<AssetsHeader setOpen={setOpen} open={open} />
+			{open ? <Popup setOpen={setOpen}/> : <></>}
+			<AssetsHeader setOpen={setOpen} open={open} newAccount={newAccount}/>
 			<AssetsAmounts/>
 			<AssetsFunctions />
 		</>

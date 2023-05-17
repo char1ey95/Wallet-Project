@@ -15,6 +15,16 @@ class WalletServer {
         }
     }
 
+    async getAllWallet(req: Request, res: Response) {
+        try {
+            const accountsList = this.wallet.getAccountInfo()
+            res.json({ accountsList })
+        } catch (e) {
+            if (e instanceof Error) res.status(500).send(e.message)
+            res.status(500)
+        }
+    }
+
     async getAccountBalance(req: Request, res: Response) {
         try {
             const account = this.wallet.get(req.params.account)
@@ -28,7 +38,7 @@ class WalletServer {
         }
     }
 
-    async createWallet(req: Request, res: Response) {
+    async getCreateWallet(req: Request, res: Response) {
         try {
             const account = this.wallet.create()
             const { data: { balance } } = await this.axios.post(`/getBalance`, {
@@ -61,11 +71,11 @@ class WalletServer {
         }
     }
 
-    async postMining(req: Request, res: Response){
+    async postMining(req: Request, res: Response) {
         try {
             const { account } = req.body
-            const result = await this.axios.post('/mineBlock', { account })
-            res.json({ result })
+            const { data } = await this.axios.post('/mineBlock', { account })
+            res.json({ data })
         } catch (e) {
             res.status(500)
         }

@@ -20,6 +20,10 @@ class Wallet {
         return accounts
     }
 
+    public getAccountInfo(): Accounts[] {
+        return this.accounts
+    }
+
     public set(privateKey: string) {
         const publicKey = this.digitalSignature.createPublicKey(privateKey)
         const account = this.digitalSignature.createAccount(publicKey)
