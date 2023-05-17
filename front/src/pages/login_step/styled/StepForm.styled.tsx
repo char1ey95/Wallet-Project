@@ -89,10 +89,10 @@ export const StepForm = ({ step, btn_content }: Step_Num) => {
 
     const renderStepComponent = (step: number) => {
         const steps = []
-        if(step = 1) steps.push(<Step_1_Content></Step_1_Content>)
-        if(step = 2) steps.push(<Step_2_Content></Step_2_Content>)
-        if(step = 3) steps.push(<Step_3_Content></Step_3_Content>)
-        if(step = 4) steps.push(<Step_4_Content></Step_4_Content>)
+        if(step === 1) steps.push(<Step_1_Content></Step_1_Content>)
+        if(step === 2) steps.push(<Step_2_Content></Step_2_Content>)
+        if(step === 3) steps.push(<Step_3_Content></Step_3_Content>)
+        if(step === 4) steps.push(<Step_4_Content></Step_4_Content>)
         return steps
     }
 

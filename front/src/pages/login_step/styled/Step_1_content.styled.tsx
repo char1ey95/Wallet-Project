@@ -1,16 +1,5 @@
 import styled from "styled-components"
-
-const Step_1_ContentWrap = styled.div`
-    width: 100%;
-    height: 100%;
-`
-
-const Step_1_ContentSubject = styled.h3`
-    width: 100%;
-    height: 15%;
-    text-align: center;
-    line-height: 2rem;
-`
+import { Step_ContentWrap, Step_ContentSubject } from "./Step_content.styled"
 
 const Step_1_Contents = styled.div`
     display: grid;
@@ -51,11 +40,11 @@ export const Step_1_Content = () => {
     }
 
     return (
-        <Step_1_ContentWrap>
-            <Step_1_ContentSubject>단어를 순서대로 입력해주세요</Step_1_ContentSubject>
+        <Step_ContentWrap>
+            <Step_ContentSubject>단어를 순서대로 입력해주세요</Step_ContentSubject>
             <Step_1_Contents>
                 {renderInput()}
             </Step_1_Contents>
-        </Step_1_ContentWrap>
+        </Step_ContentWrap>
     )
 }
