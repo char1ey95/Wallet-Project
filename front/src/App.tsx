@@ -1,11 +1,13 @@
 import { MainForm } from "./common/form";
-import { Assets } from "./pages/assets";
+import { Step_1, Step_2, Step_3, Step_4 } from "./pages";
+import { AppRouter } from "./routes";
+
 
 const App = () => {
 	return (
 		<>
 			<MainForm>
-				<Assets />
+				<AppRouter />
 			</MainForm>
 		</>
 	);
