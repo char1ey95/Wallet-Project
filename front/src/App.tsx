@@ -1,13 +1,14 @@
 import { MainForm } from "./common/form";
-import { Assets } from "./pages/assets";
-import { Home } from "./pages/home";
+import { Step_1 } from "./pages";
+
 
 const App = () => {
 	return (
 		<>
 			<MainForm>
 				{/* <Assets /> */}
-				<Home />
+				{/* <Home /> */}
+				<Step_1 />
 			</MainForm>
 		</>
 	);
