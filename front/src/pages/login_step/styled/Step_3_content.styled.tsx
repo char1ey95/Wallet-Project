@@ -15,8 +15,13 @@ const Step_3_SelectMnemonicWrap = styled.div`
     width: 100%;
     height: 100%;
 
+    & > div {
+        transition: all 0.2s;
+    }
+
     & > .select {
-        background-color: black;
+        background-color: #fff;
+        color: #000;
     }
 `
 
