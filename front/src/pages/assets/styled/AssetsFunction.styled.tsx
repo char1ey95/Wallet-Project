@@ -54,8 +54,8 @@ export const AssetsFunctions = () => {
     return (
         <AssetsFunctionsWrapper>
             <DarkInput placeholder='송금할 계좌를 입력해주세요' />
-            <EllipseBtn type="submit">송금하기</EllipseBtn>
-            <EllipseBtn type="button" onClick={handleClickMine}>채굴하기</EllipseBtn>
+            <EllipseBtn type="submit">Send</EllipseBtn>
+            <EllipseBtn type="button" onClick={handleClickMine}>Mine</EllipseBtn>
         </AssetsFunctionsWrapper>
     )
 }

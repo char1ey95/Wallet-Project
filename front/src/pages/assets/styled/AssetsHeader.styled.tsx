@@ -2,8 +2,9 @@ import { Icon } from "@iconify/react";
 import styled from "styled-components";
 import { RootState } from "../../../store/rootState";
 import { useSelector } from "react-redux";
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import { useNavigate } from "react-router-dom";
 
 const AssetsHeaderWrap = styled.header`
 	width: 100%;
@@ -85,7 +86,13 @@ interface AssetHeaderProps {
 }
 
 export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen, newAccount }) => {
+	const navigate = useNavigate()
 	const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
+	const [ copy, setCopy ] = useState(selectedAccount.account)
+
+	const handleClickCancel = (e: MouseEvent) => {
+		navigate('/')
+	}
 
 	const handleClickOpen = (e: MouseEvent) => {
 		setOpen(!open)
@@ -93,6 +100,11 @@ export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen, newAcc
 
 	const handleClickNewAccount = (e: MouseEvent) => {
 		newAccount()
+	}
+
+	const handleClickCopy = (e: MouseEvent) => {
+		setCopy(selectedAccount.account)
+		alert(`${copy}가 복사되었습니다.`)
 	}
 
 	return (
@@ -105,13 +117,13 @@ export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen, newAcc
 					</AssetsHeaderAccountsName>
 				</AssetsHeaderAccountsList>
 				<AssetsHeaderAccountBtnWarp>
-					<AssetsHeaderAccountCopyBtn>
+					<AssetsHeaderAccountCopyBtn onClick={handleClickCopy}>
 						<Icon icon={"material-symbols:content-copy"}></Icon>
 					</AssetsHeaderAccountCopyBtn>
 					<AssetsHeaderAccountAddBtn onClick={handleClickNewAccount}>
 						<Icon icon={"material-symbols:add-card-outline"}></Icon>
 					</AssetsHeaderAccountAddBtn>
-					<AssetsHeaderAccountCancelBtn>
+					<AssetsHeaderAccountCancelBtn onClick={handleClickCancel}>
 						<Icon icon={"material-symbols:cancel"}></Icon>
 					</AssetsHeaderAccountCancelBtn>
 				</AssetsHeaderAccountBtnWarp>

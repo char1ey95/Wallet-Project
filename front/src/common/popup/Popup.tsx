@@ -79,7 +79,7 @@ export const Popup: React.FC<PopupProps> = ({setOpen}) => {
         const findValue = account.innerHTML.substring(0, 6)
         const [selectOne] = accounts.filter((v) => v.account.substring(0, 6) === findValue)
         getBalance(selectOne.account)
-        dispatch(selectAccount(balance))
+        // dispatch(selectAccount())
         setOpen(false)
     }
 
