@@ -1,10 +1,8 @@
 import { Icon } from "@iconify/react"
-import styled, { StyledComponent } from "styled-components"
-import { JsxElement } from "typescript"
-import { EllipseBtn } from "../../../common/button"
+import styled from "styled-components"
 import { Step_1_Content, Step_2_Content, Step_3_Content, Step_4_Content } from "."
 
-const StepFormWrap = styled.form`
+const StepFormWrap = styled.div`
     width: 100%;
     height: 100%;
 `
@@ -16,11 +14,16 @@ const StepFormHeader = styled.header`
 `
 
 const StepFormHeaderArrow = styled.div`
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20%;
     height: 100%;
+
+    &:hover {
+        color: ${props => props.theme.yellow.hover};
+    }
 `
 
 const StepFormHeaderStepWrap = styled.div`
@@ -51,14 +54,6 @@ const StepFormHeaderUnStep = styled.div`
 const StepFormContentWrap = styled.div`
     width: 100%;
     height: 65%;
-`
-
-const StepFormFooter = styled.footer`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 25%;
 `
 
 interface Step_Num {
@@ -110,9 +105,6 @@ export const StepForm = ({ step, btn_content }: Step_Num) => {
             <StepFormContentWrap>
                 {renderStepComponent(step)}
             </StepFormContentWrap>
-            <StepFormFooter>
-                <EllipseBtn>{btn_content}</EllipseBtn>
-            </StepFormFooter>
         </StepFormWrap>
     )
 }

@@ -1,5 +1,8 @@
 import styled from "styled-components"
-import { Step_ContentWrap, Step_ContentSubject, Step_Contents } from "./Step_content.styled"
+import { Step_ContentWrap, Step_ContentSubject, Step_Contents, StepFormFooter } from "./Step_content.styled"
+import { EllipseBtn } from "../../../common/button"
+import { useNavigate } from "react-router-dom"
+import { MouseEvent } from "react"
 
 const Step_2_MnemonicWrap = styled.div`
     width: 80%;
@@ -20,6 +23,7 @@ const Step_2_Mnemonic = styled.div`
 
 
 export const Step_2_Content = () => {
+    const navigate = useNavigate()
     
     const ex_mnemonic = ['비극', '상금', '집안', '금연', '도저히', '저곳', '기획', '기원', '작품', '계약', '찌꺼기', '중국']
     
@@ -31,14 +35,23 @@ export const Step_2_Content = () => {
         return divs
     }
 
+    const handleClickStep2 = (e: MouseEvent) => {
+        navigate('/step3')
+    }
+
     return (
-        <Step_ContentWrap>
-            <Step_ContentSubject>단어를 저장해주세요</Step_ContentSubject>
-            <Step_Contents>
-                <Step_2_MnemonicWrap>
-                    {renderMnemonic(ex_mnemonic)}
-                </Step_2_MnemonicWrap>
-            </Step_Contents>
-        </Step_ContentWrap>
+        <>
+            <Step_ContentWrap>
+                <Step_ContentSubject>단어를 저장해주세요</Step_ContentSubject>
+                <Step_Contents>
+                    <Step_2_MnemonicWrap>
+                        {renderMnemonic(ex_mnemonic)}
+                    </Step_2_MnemonicWrap>
+                </Step_Contents>
+            </Step_ContentWrap>
+            <StepFormFooter>
+                <EllipseBtn onClick={handleClickStep2}>Continue</EllipseBtn>
+            </StepFormFooter>
+        </>
     )
 }

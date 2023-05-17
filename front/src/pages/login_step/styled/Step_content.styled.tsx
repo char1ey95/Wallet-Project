@@ -18,5 +18,12 @@ export const Step_Contents = styled.div`
     align-items: center;
     width: 100%;
     height: 85%;
-    background-color: coral;
+`
+
+export const StepFormFooter = styled.footer`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 25%;
 `

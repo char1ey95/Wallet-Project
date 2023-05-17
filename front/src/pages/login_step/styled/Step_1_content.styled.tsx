@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import { Step_ContentWrap, Step_ContentSubject } from "./Step_content.styled"
+import { Step_ContentWrap, Step_ContentSubject, StepFormFooter } from "./Step_content.styled"
+import { EllipseBtn } from "../../../common/button"
 
 const Step_1_Contents = styled.div`
     display: grid;
@@ -40,11 +41,16 @@ export const Step_1_Content = () => {
     }
 
     return (
-        <Step_ContentWrap>
-            <Step_ContentSubject>단어를 순서대로 입력해주세요</Step_ContentSubject>
-            <Step_1_Contents>
-                {renderInput()}
-            </Step_1_Contents>
-        </Step_ContentWrap>
+        <>
+            <Step_ContentWrap>
+                <Step_ContentSubject>단어를 순서대로 입력해주세요</Step_ContentSubject>
+                <Step_1_Contents>
+                    {renderInput()}
+                </Step_1_Contents>
+            </Step_ContentWrap>
+            <StepFormFooter>
+                <EllipseBtn>Submit</EllipseBtn>
+            </StepFormFooter>
+        </>
     )
 }

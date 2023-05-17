@@ -1,6 +1,8 @@
 import styled from "styled-components"
-import { Step_ContentWrap, Step_ContentSubject, Step_Contents } from "./Step_content.styled"
+import { Step_ContentWrap, Step_ContentSubject, Step_Contents, StepFormFooter } from "./Step_content.styled"
 import { MouseEvent, useState } from "react"
+import { EllipseBtn } from "../../../common/button"
+import { useNavigate } from "react-router-dom"
 
 const Step_3_SelectMnemonicWrap = styled.div`
     display: grid;
@@ -28,6 +30,7 @@ const Step_3_SelectMnemonic = styled.div`
 `
 
 export const Step_3_Content = () => {
+    const navigate = useNavigate()
     const [selectValue, setSeletValue] = useState('')
 
     const ex_mnemonic = ['비극', '상금', '집안', '금연', '도저히', '저곳', '기획', '기원', '작품', '계약', '찌꺼기', '중국']
@@ -46,7 +49,11 @@ export const Step_3_Content = () => {
         return divs
     }
 
-    return(
+    const handleClickStep2 = (e: MouseEvent) => {
+        (selectValue === ex_mnemonic[ex_mnemonic.length - 1]) ? navigate('/step4') : alert('다시 선택해주세요')
+    }
+
+    return (
         <>
             <Step_ContentWrap>
                 <Step_ContentSubject>마지막 단어를 선택해주세요</Step_ContentSubject>
@@ -56,6 +63,9 @@ export const Step_3_Content = () => {
                     </Step_3_SelectMnemonicWrap>
                 </Step_Contents>
             </Step_ContentWrap>
+            <StepFormFooter>
+                <EllipseBtn onClick={handleClickStep2}>Submit</EllipseBtn>
+            </StepFormFooter>
         </>
     )
 }
