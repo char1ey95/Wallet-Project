@@ -1,5 +1,5 @@
 import { MainForm } from "./common/form";
-import { Step_1, Step_2 } from "./pages";
+import { Step_1, Step_2, Step_3 } from "./pages";
 
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
 			<MainForm>
 				{/* <Assets /> */}
 				{/* <Home /> */}
-				<Step_2 />
+				<Step_3 />
 			</MainForm>
 		</>
 	);

@@ -24,11 +24,11 @@ export const Step_2_Content = () => {
     const ex_mnemonic = ['비극', '상금', '집안', '금연', '도저히', '저곳', '기획', '기원', '작품', '계약', '찌꺼기', '중국']
     
     const renderMnemonic = (mnemonic: string[]) => {
-        const Inputs = []
+        const divs = []
         for (let i = 0; i < 12; i++) {
-            Inputs.push(<Step_2_Mnemonic key={i}>{i+1}. {mnemonic[i]}</Step_2_Mnemonic>)
+            divs.push(<Step_2_Mnemonic key={i}>{i+1}. {mnemonic[i]}</Step_2_Mnemonic>)
         }
-        return Inputs
+        return divs
     }
 
     return (
