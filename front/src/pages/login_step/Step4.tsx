@@ -1,30 +1,10 @@
-import styled from "styled-components"
-import { DarkInput } from "../../../common/input"
-import { Step_ContentWrap, Step_ContentSubject, Step_Contents, StepFormFooter } from "./Step_content.styled"
-import { EllipseBtn } from "../../../common/button"
-import { FormEvent, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Step_4_Form, Step_ContentWrap, Step_ContentSubject, Step_Contents, InputWrap, StepFormFooter } from "./styled";
+import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { EllipseBtn } from "../../common/button";
+import { DarkInput } from "../../common/input";
 
-const Step_4_Form = styled.form`
-    width: 100%;
-    height: 100%;
-`
-
-const InputWrap = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-
-    & > input {
-        margin: 1.5rem 0;
-    }
-`
-
-export const Step_4_Content = () => {
+export const Step4 = () => {
     const navigate = useNavigate()
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');

@@ -1,17 +1,11 @@
-import { Icon } from "@iconify/react";
 import styled from "styled-components";
-import { RootState } from "../../../store/rootState";
-import { useSelector } from "react-redux";
-import React, { MouseEvent, useState } from "react";
-import { QRCodeSVG } from "qrcode.react";
-import { useNavigate } from "react-router-dom";
 
-const AssetsHeaderWrap = styled.header`
+export const AssetsHeaderWrap = styled.header`
 	width: 100%;
 	height: 3rem;
 `;
 
-const AssetsHeaderAccountsList = styled.div`
+export const AssetsHeaderAccountsList = styled.div`
 	cursor: pointer;
 	display: flex;
 	align-items: center;
@@ -23,17 +17,17 @@ const AssetsHeaderAccountsList = styled.div`
 	}
 `;
 
-const AssetsHeaderAccountsIcon = styled.img`
+export const AssetsHeaderAccountsIcon = styled.img`
 	height: 100%;
 	border-radius: 50%;
 	background-color: #fff;
 `;
 
-const AssetsHeaderAccountsName = styled.div`
+export const AssetsHeaderAccountsName = styled.div`
 	font-family: "Gmarket";
 `;
 
-const AssetsHeaderAccountBtnWarp = styled.div`
+export const AssetsHeaderAccountBtnWarp = styled.div`
 	display: flex;
 	justify-content: right;
 	width: 40%;
@@ -49,28 +43,28 @@ const AssetsHeaderAccountBtnWarp = styled.div`
 	}
 `;
 
-const AssetsHeaderAccountCopyBtn = styled.button`
+export const AssetsHeaderAccountCopyBtn = styled.button`
 	width: 2rem;
 	font-size: 1.5rem;
 	background-color: transparent;
 	border: none;
 `;
 
-const AssetsHeaderAccountAddBtn = styled.button`
+export const AssetsHeaderAccountAddBtn = styled.button`
 	width: 2rem;
 	font-size: 1.5rem;
 	background-color: transparent;
 	border: none;
 `;
 
-const AssetsHeaderAccountCancelBtn = styled.button`
+export const AssetsHeaderAccountCancelBtn = styled.button`
 	width: 2rem;
 	font-size: 1.5rem;
 	background-color: transparent;
 	border: none;
 `;
 
-const AssetsHeaderContents = styled.div`
+export const AssetsHeaderContents = styled.div`
 	padding: 0.5rem 0;
 	display: flex;
 	justify-content: space-evenly;
@@ -78,56 +72,3 @@ const AssetsHeaderContents = styled.div`
 	height: 100%;
 	box-sizing: border-box;
 `;
-
-interface AssetHeaderProps {
-	open: boolean
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>
-	newAccount: () => Promise<void>
-}
-
-export const AssetsHeader: React.FC<AssetHeaderProps> = ({ open, setOpen, newAccount }) => {
-	const navigate = useNavigate()
-	const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
-	const [ copy, setCopy ] = useState(selectedAccount.account)
-
-	const handleClickCancel = (e: MouseEvent) => {
-		navigate('/')
-	}
-
-	const handleClickOpen = (e: MouseEvent) => {
-		setOpen(!open)
-	}
-
-	const handleClickNewAccount = (e: MouseEvent) => {
-		newAccount()
-	}
-
-	const handleClickCopy = (e: MouseEvent) => {
-		setCopy(selectedAccount.account)
-		alert(`${copy}가 복사되었습니다.`)
-	}
-
-	return (
-		<AssetsHeaderWrap>
-			<AssetsHeaderContents>
-				<AssetsHeaderAccountsList onClick={handleClickOpen}>
-					<QRCodeSVG value={selectedAccount.account} width="24" height="24"></QRCodeSVG>
-					<AssetsHeaderAccountsName>
-						{selectedAccount.account.substring(0,6) + '...' + selectedAccount.account.substring(36,40)}
-					</AssetsHeaderAccountsName>
-				</AssetsHeaderAccountsList>
-				<AssetsHeaderAccountBtnWarp>
-					<AssetsHeaderAccountCopyBtn onClick={handleClickCopy}>
-						<Icon icon={"material-symbols:content-copy"}></Icon>
-					</AssetsHeaderAccountCopyBtn>
-					<AssetsHeaderAccountAddBtn onClick={handleClickNewAccount}>
-						<Icon icon={"material-symbols:add-card-outline"}></Icon>
-					</AssetsHeaderAccountAddBtn>
-					<AssetsHeaderAccountCancelBtn onClick={handleClickCancel}>
-						<Icon icon={"material-symbols:cancel"}></Icon>
-					</AssetsHeaderAccountCancelBtn>
-				</AssetsHeaderAccountBtnWarp>
-			</AssetsHeaderContents>
-		</AssetsHeaderWrap>
-	);
-};
