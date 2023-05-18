@@ -7,8 +7,8 @@ export const AppRouter = () => {
             <Route path='/' element={<Home />} />
             <Route path='/step1' element={<Step step={1} previous={''}/>} />
             <Route path='/step2' element={<Step step={2} previous={''}/>} />
-            <Route path='/step3' element={<Step step={3} previous={'/step2'}/>} />
-            <Route path='/step4' element={<Step step={4} previous={'/step3'}/>} />
+            <Route path='/step3' element={<Step step={3} previous={'step2'}/>} />
+            <Route path='/step4' element={<Step step={4} previous={'step3'}/>} />
             <Route path='/login' element={<Login />} />
             <Route path='/assets' element={<Assets />} />
         </Routes>

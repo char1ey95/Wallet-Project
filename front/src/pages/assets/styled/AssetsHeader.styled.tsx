@@ -24,7 +24,7 @@ export const AssetsHeaderAccountsIcon = styled.img`
 `;
 
 export const AssetsHeaderAccountsName = styled.div`
-	font-family: "Gmarket";
+	font-family: ${props => props.theme.font};
 `;
 
 export const AssetsHeaderAccountBtnWarp = styled.div`

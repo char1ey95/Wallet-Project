@@ -9,11 +9,11 @@ export const EllipseBtn = styled.button`
     line-height: 3.75rem;
     border: none;
 	border-radius: 2rem;
-    background-color: ${props => props.color || props.theme.yellow.color};
+    background-color: ${props => props.color || props.theme.main.color};
     transition: all 0.2s;
 
     &:hover {
         /* color: ${props => props.theme.black.color}; */
-        background-color: ${props => props.theme.yellow.hover};
+        background-color: ${props => props.theme.main.hover};
     }
 `

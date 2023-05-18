@@ -27,5 +27,5 @@ export const Step3_SelectMnemonic = styled.div`
     line-height: 2.5rem;
     font-weight: 700;
     border-radius: 1rem;
-    background-color: #9d9d9d;
+    background-color: ${props => props.theme.white};
 `

@@ -20,14 +20,6 @@ const stretch = keyframes`
     }
 `
 
-export const LoadingCircleWrap = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-`
-
 export const LoadingCircleSvg = styled.svg`
     width: 4rem;
     height: 4rem;

@@ -31,7 +31,7 @@ const PopupHeader = styled.header`
 
 const PopupHeaderName = styled.h1`
 	color: #fff;
-	font-family: "Gmarket";
+	font-family: ${props => props.theme.font};
 	font-size: 1.25rem;
 `;
 

@@ -17,13 +17,13 @@ export const Step1_ContentsInput = styled.input`
 	height: 2.5rem;
 	font-size: 1rem;
     font-weight: 700;
-	color: #2c2c2c;
-	background-color: #d5d5d5;
+	color: ${props => props.theme.black};
+	background-color: ${props => props.theme.white};
 	border: none;
     border-radius: 3rem;
 	box-sizing: border-box;
 	
 	&:focus{
-		border: 1px solid #446df5;
+		border: 1px solid ${props => props.theme.InputBorder};
 	}
 `

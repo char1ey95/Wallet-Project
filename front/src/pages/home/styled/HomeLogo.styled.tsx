@@ -10,9 +10,9 @@ export const HomeLogoWrap = styled.div`
 `
 
 export const HomeLogoImg = styled.img`
-    height: 60%;
+    height: 50%;
 `
 
 export const HomeSubject = styled.h1`
-    margin-top: 1rem;
+    margin-top: 2rem;
 `

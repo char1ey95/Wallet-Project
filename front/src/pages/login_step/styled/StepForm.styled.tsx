@@ -22,10 +22,10 @@ export const StepFormHeaderArrow = styled.div`
     align-items: center;
     width: 20%;
     height: 100%;
-    color: ${props => props.theme.yellow.color};
+    color: ${props => props.theme.main.color};
 
     &:hover {
-        color: ${props => props.theme.yellow.hover};
+        color: ${props => props.theme.main.hover};
     }
 `
 
@@ -44,14 +44,14 @@ export const StepFormHeaderStep = styled.div`
     width: 3rem;
     height: 0.4rem;
     border-radius: 1rem;
-    background-color: white;
+    background-color: #ffffff;
 `
 
 export const StepFormHeaderUnStep = styled.div`
     width: 3rem;
     height: 0.4rem;
     border-radius: 1rem;
-    background-color: #5d5d5d;
+    background-color: ${props => props.theme.grey};
 `
 
 export const StepFormContentWrap = styled.div`

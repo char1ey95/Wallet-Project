@@ -6,18 +6,18 @@ export const CircleBtn = styled.button`
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background-color: ${props => props.theme.yellow.color};
+    background-color: ${props => props.theme.main.color};
     font-size: 2rem;
     color: #000;
     border: none;
 
     &:hover, &:hover .iconify{
-        background-color: ${props => props.theme.yellow.hover};
+        background-color: ${props => props.theme.main.hover};
     }
 
     & .iconify {
         position: relative;
-        background-color: ${props => props.theme.yellow.color};
+        background-color: ${props => props.theme.main.color};
         top: 0.25rem;
     }
 `
