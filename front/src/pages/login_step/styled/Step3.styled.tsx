@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Step_3_SelectMnemonicWrap = styled.div`
+export const Step3_SelectMnemonicWrap = styled.div`
     display: grid;
     grid-template-rows: repeat(4);
     grid-template-columns: repeat(3, 6rem);
@@ -21,7 +21,7 @@ export const Step_3_SelectMnemonicWrap = styled.div`
     }
 `
 
-export const Step_3_SelectMnemonic = styled.div`
+export const Step3_SelectMnemonic = styled.div`
     height: 2.5rem;
     text-align: center;
     line-height: 2.5rem;

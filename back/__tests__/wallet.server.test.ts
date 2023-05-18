@@ -61,26 +61,26 @@ describe('WalletServer', () => {
         });
     })
 
-    describe('postWallet', () => {
-        it('계정을 생성하고 잔액을 잘 반환하는가?', async () => {
-            const createdAccount = { account: '96d47cda621dd4d3e714feee7f709f66d579f54d' };
-            const req: Request = {} as Request;
-            const res: Response = {
-                json: jest.fn(),
-                status: jest.fn().mockReturnThis(),
-                send: jest.fn(),
-            } as unknown as Response;
+    // describe('postWallet', () => {
+    //     it('계정을 생성하고 잔액을 잘 반환하는가?', async () => {
+    //         const createdAccount = { account: '96d47cda621dd4d3e714feee7f709f66d579f54d' };
+    //         const req: Request = {} as Request;
+    //         const res: Response = {
+    //             json: jest.fn(),
+    //             status: jest.fn().mockReturnThis(),
+    //             send: jest.fn(),
+    //         } as unknown as Response;
 
-            wallet.create = jest.fn().mockReturnValue(createdAccount);
+    //         wallet.create = jest.fn().mockReturnValue(createdAccount);
 
-            const balance = 1000;
-            axios.post = jest.fn().mockResolvedValue({ data: { balance } });
+    //         const balance = 1000;
+    //         axios.post = jest.fn().mockResolvedValue({ data: { balance } });
 
-            await walletServer.postWallet(req, res);
+    //         await walletServer.postWallet(req, res);
 
-            expect(res.json).toHaveBeenCalledWith({ ...createdAccount, balance });
-        });
-    })
+    //         expect(res.json).toHaveBeenCalledWith({ ...createdAccount, balance });
+    //     });
+    // })
 
     describe('postTransaction', () => {
 

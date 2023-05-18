@@ -1,10 +1,10 @@
-import { Step_3_SelectMnemonic, Step_ContentWrap, Step_ContentSubject, Step_Contents, Step_3_SelectMnemonicWrap, StepFormFooter } from "./styled"
 import { useState, useEffect, MouseEvent } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { EllipseBtn } from "../../common/button"
 import { mnemonicWord } from "../../store/account/account.interface"
 import { RootState } from "../../store/rootState"
+import { Step3_SelectMnemonic, StepContentWrap, StepContentSubject, StepContents, Step3_SelectMnemonicWrap, StepFormFooter } from "./styled"
 
 export const Step3 = () => {
     const {mnemonic} = useSelector((state: RootState) => state.accounts)
@@ -25,7 +25,7 @@ export const Step3 = () => {
     const renderMnemonic = (mnemonic: string[]) => {
         const divs = []
         for (let i = 0; i < 12; i++) {
-            divs.push(<Step_3_SelectMnemonic key={i} onClick={handleClick}>{mnemonic[i]}</Step_3_SelectMnemonic>)
+            divs.push(<Step3_SelectMnemonic key={i} onClick={handleClick}>{mnemonic[i]}</Step3_SelectMnemonic>)
         }
         return divs
     }
@@ -45,14 +45,14 @@ export const Step3 = () => {
 
     return (
         <>
-            <Step_ContentWrap>
-                <Step_ContentSubject>마지막 단어를 선택해주세요</Step_ContentSubject>
-                <Step_Contents>
-                    <Step_3_SelectMnemonicWrap>
+            <StepContentWrap>
+                <StepContentSubject>마지막 단어를 선택해주세요</StepContentSubject>
+                <StepContents>
+                    <Step3_SelectMnemonicWrap>
                         {renderMnemonic(shuffledMnemonic)}
-                    </Step_3_SelectMnemonicWrap>
-                </Step_Contents>
-            </Step_ContentWrap>
+                    </Step3_SelectMnemonicWrap>
+                </StepContents>
+            </StepContentWrap>
             <StepFormFooter>
                 <EllipseBtn onClick={handleClickStep2}>Submit</EllipseBtn>
             </StepFormFooter>

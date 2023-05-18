@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { QRCodeSVG } from "qrcode.react"
 import { Icon } from "@iconify/react"
-import { createAccount, getAccounts, mineSuccess } from "../../store/account"
+import { createAccount, mineSuccess } from "../../store/account"
 import { Popup } from "../../common/popup"
 import request from "../../utils/request"
 import { RootState } from "../../store/rootState"
@@ -30,6 +30,7 @@ export const Assets = () => {
 	const mineBlock = async () => {
 		try {
 			const { data } = await request.post('/mineBlock', { account: selectedAccount.account })
+			console.log(data)
 			getAmount()
 			alert('블럭이 생성되었습니다!')
 		} catch (e) {
@@ -67,14 +68,14 @@ export const Assets = () => {
 		}
 	}
 
-	const searchAccount = async () => {
-		try {
-			const { data } = await request.get('/allWallet')
-			dispatch(getAccounts(data.accountsList))
-		} catch (e) {
+	// const searchAccount = async () => {
+	// 	try {
+	// 		const { data } = await request.get('/allWallet')
+	// 		dispatch(getAccounts(data.accountsList))
+	// 	} catch (e) {
 
-		}
-	}
+	// 	}
+	// }
 
 	useEffect(() => {
 		// searchAccount()

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Step_1_Contents = styled.div`
+export const Step1_Contents = styled.div`
     display: grid;
     grid-template-rows: repeat(6);
     grid-template-columns: repeat(2, 7rem);
@@ -12,7 +12,7 @@ export const Step_1_Contents = styled.div`
     height: 85%;
 `
 
-export const Step_1_ContentsInput = styled.input`
+export const Step1_ContentsInput = styled.input`
 	padding: 0.5rem 1rem;
 	height: 2.5rem;
 	font-size: 1rem;

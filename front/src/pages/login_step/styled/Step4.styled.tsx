@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Step_4_Form = styled.form`
+export const Step4_Form = styled.form`
     width: 100%;
     height: 100%;
 `

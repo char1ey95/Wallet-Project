@@ -3,8 +3,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/rootState";
 import { MouseEvent, useState } from "react";
-import { selectAccount } from "../../store/account";
-import { AccountState, account } from "../../store/account/account.interface";
+import { account } from "../../store/account/account.interface";
 import request from "../../utils/request";
 
 const PopupWrap = styled.div`
@@ -53,7 +52,7 @@ const PopupContentWrap = styled.div`
 
 const PopupContent = styled.div`
     margin: 0.5rem 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
 `
 
 interface PopupProps {

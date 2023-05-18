@@ -1,8 +1,8 @@
-import { Step_4_Form, Step_ContentWrap, Step_ContentSubject, Step_Contents, InputWrap, StepFormFooter } from "./styled";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { EllipseBtn } from "../../common/button";
 import { DarkInput } from "../../common/input";
+import { Step4_Form, StepContentWrap, StepContentSubject, StepContents, InputWrap, StepFormFooter } from "./styled";
 
 export const Step4 = () => {
     const navigate = useNavigate()
@@ -24,10 +24,10 @@ export const Step4 = () => {
     };
 
     return (
-        <Step_4_Form onSubmit={handleSubmit}>
-            <Step_ContentWrap>
-                <Step_ContentSubject>비밀번호를 입력해주세요</Step_ContentSubject>
-                <Step_Contents>
+        <Step4_Form onSubmit={handleSubmit}>
+            <StepContentWrap>
+                <StepContentSubject>비밀번호를 입력해주세요</StepContentSubject>
+                <StepContents>
                     <InputWrap>
                         <DarkInput
                             name={'pw'}
@@ -44,12 +44,12 @@ export const Step4 = () => {
                             onChange={handleConfirmPasswordChange}
                         />
                     </InputWrap>
-                </Step_Contents>
-            </Step_ContentWrap>
+                </StepContents>
+            </StepContentWrap>
             <StepFormFooter>
                 <EllipseBtn type="submit">Submit</EllipseBtn>
             </StepFormFooter>
-        </Step_4_Form>
+        </Step4_Form>
     );
 };
 

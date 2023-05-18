@@ -1,4 +1,3 @@
-import { Step_2_Mnemonic, Step_ContentWrap, Step_ContentSubject, Step_Contents, Step_2_MnemonicWrap, StepFormFooter } from "./styled"
 import { MouseEvent, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -6,6 +5,7 @@ import { EllipseBtn } from "../../common/button"
 import { getMnemonics } from "../../store/account"
 import { RootState } from "../../store/rootState"
 import request from "../../utils/request"
+import { StepContentWrap, StepContentSubject, StepContents, Step2_MnemonicWrap, StepFormFooter, Step2_Mnemonic } from "./styled"
 
 export const Step2 = () => {
     const { mnemonic } = useSelector((state: RootState) => state.accounts)
@@ -29,7 +29,7 @@ export const Step2 = () => {
     const renderMnemonic = (mnemonic: string[]) => {
         const divs = []
         for (let i = 0; i < 12; i++) {
-            divs.push(<Step_2_Mnemonic key={i}>{i + 1}. {mnemonic[i]}</Step_2_Mnemonic>)
+            divs.push(<Step2_Mnemonic key={i}>{i + 1}. {mnemonic[i]}</Step2_Mnemonic>)
         }
         return divs
     }
@@ -44,14 +44,14 @@ export const Step2 = () => {
 
     return (
         <>
-            <Step_ContentWrap>
-                <Step_ContentSubject>단어를 저장해주세요</Step_ContentSubject>
-                <Step_Contents>
-                    <Step_2_MnemonicWrap>
+            <StepContentWrap>
+                <StepContentSubject>단어를 저장해주세요</StepContentSubject>
+                <StepContents>
+                    <Step2_MnemonicWrap>
                         {renderMnemonic(mnemonic)}
-                    </Step_2_MnemonicWrap>
-                </Step_Contents>
-            </Step_ContentWrap>
+                    </Step2_MnemonicWrap>
+                </StepContents>
+            </StepContentWrap>
             <StepFormFooter>
                 <EllipseBtn onClick={handleClickStep2}>Continue</EllipseBtn>
             </StepFormFooter>

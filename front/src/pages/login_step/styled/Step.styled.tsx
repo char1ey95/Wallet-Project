@@ -1,18 +1,18 @@
 import styled from "styled-components"
 
-export const Step_ContentWrap = styled.div`
+export const StepContentWrap = styled.div`
     width: 100%;
     height: 100%;
 `
 
-export const Step_ContentSubject = styled.h3`
+export const StepContentSubject = styled.h3`
     width: 100%;
     height: 15%;
     text-align: center;
     line-height: 2rem;
 `
 
-export const Step_Contents = styled.div`
+export const StepContents = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
