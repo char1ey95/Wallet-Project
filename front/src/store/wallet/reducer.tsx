@@ -15,6 +15,7 @@ const initialState: WalletState = {
 };
 
 export const wallet = (state = initialState, action: { type: string; payload: any }) => {
+	console.log("action::", action)
 	switch (action.type) {
 		case GET_WALLET_REQUEST:
 			return {

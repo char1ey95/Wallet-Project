@@ -3,8 +3,12 @@ import { Action } from "redux";
 import request from "../../utils/request";
 import { WalletState } from "../interface";
 import { GET_WALLET_FAILURE, GET_WALLET_REQUEST, GET_WALLET_SUCCESS } from ".";
+import { RootState } from "../rootState";
+import { useDispatch } from "react-redux";
 
-export const requestWallet = (): ThunkAction<void, WalletState, unknown, Action<string>> => async (dispatch) => {
+const dispatch = useDispatch()
+
+export const requestWallet = () => async () => {
     dispatch({ type: GET_WALLET_REQUEST });
 
     try {

@@ -10,12 +10,21 @@ import request from "../../utils/request"
 import { RootState } from "../../store/rootState"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
+import { requestWallet } from "../../store/wallet"
 
 export const Assets = () => {
+	const wallet = useSelector((state: RootState) => state.wallet)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(requestWallet())
+	}, [dispatch])
+
+
+	console.log(wallet)
 	const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
 	const [open, setOpen] = useState(false)
 	const [copy, setCopy] = useState(selectedAccount.account)
-	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
 	const getAmount = async () => {
@@ -77,10 +86,10 @@ export const Assets = () => {
 	// 	}
 	// }
 
-	useEffect(() => {
-		// searchAccount()
-		if (accounts.length === 1) newAccount()
-	}, [])
+	// useEffect(() => {
+	// 	// searchAccount()
+	// 	if (accounts.length === 1) newAccount()
+	// }, [])
 
 	return (
 		<>
