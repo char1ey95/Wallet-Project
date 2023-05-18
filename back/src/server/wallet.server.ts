@@ -25,6 +25,15 @@ class WalletServer {
         }
     }
 
+    async getMnemonic(req: Request, res: Response) {
+        try {
+            const mnemonic = this.wallet.getMnemonic()
+            res.json({ mnemonic })
+        } catch (e) {
+            res.status(500)
+        }
+    }
+
     async getAccountBalance(req: Request, res: Response) {
         try {
             const account = this.wallet.get(req.params.account)

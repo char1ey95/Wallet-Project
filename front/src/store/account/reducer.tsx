@@ -1,5 +1,5 @@
 import { AccountState, AccountsPayload, InitialState } from "./account.interface";
-import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_SUCCESS, GET_ACCOUNT_FAILURE, GET_ACCOUNT_SUCCESS, MINING_FAILURE, MINING_SUCCESS, SELECT_ACCOUNT_FAILURE, SELECT_ACCOUNT_SUCCESS } from "./types";
+import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_SUCCESS, GET_ACCOUNT_FAILURE, GET_ACCOUNT_SUCCESS, MINING_FAILURE, MINING_SUCCESS, MNEMONIC_FAILURE, MNEMONIC_SUCCESS, SELECT_ACCOUNT_FAILURE, SELECT_ACCOUNT_SUCCESS } from "./types";
 
 const initialState: InitialState = {
 	isLoading: true,
@@ -17,7 +17,8 @@ const initialState: InitialState = {
 		balance: 0,
 		privateKey: "",
 		publicKey: "",
-	}
+	},
+	mnemonic: [""]
 };
 
 export const accounts = (state = initialState, action: { type: string; payload: AccountsPayload }) => {
@@ -58,7 +59,11 @@ export const accounts = (state = initialState, action: { type: string; payload: 
 				selectedAccount: action.payload
 			}
 		case MINING_FAILURE:
-			return { ...state, isLoading: true, isError: "" }
+			return {...state, isLoading: true, isError: "" }
+		case MNEMONIC_SUCCESS:
+			return {...state, isLoading: false, isError: null, mnemonic: action.payload}
+		case MNEMONIC_FAILURE:
+			return {...state, isLoading: true, isError: "" }
 		default:
 			return state;
 	}
