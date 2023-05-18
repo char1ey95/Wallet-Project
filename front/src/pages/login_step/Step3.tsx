@@ -1,43 +1,12 @@
-import styled from "styled-components"
-import { Step_ContentWrap, Step_ContentSubject, Step_Contents, StepFormFooter } from "./Step_content.styled"
-import { MouseEvent, useEffect, useState } from "react"
-import { EllipseBtn } from "../../../common/button"
-import { useNavigate } from "react-router-dom"
+import { Step_3_SelectMnemonic, Step_ContentWrap, Step_ContentSubject, Step_Contents, Step_3_SelectMnemonicWrap, StepFormFooter } from "./styled"
+import { useState, useEffect, MouseEvent } from "react"
 import { useSelector } from "react-redux"
-import { RootState } from "../../../store/rootState"
-import { mnemonicWord } from "../../../store/account/account.interface"
+import { useNavigate } from "react-router-dom"
+import { EllipseBtn } from "../../common/button"
+import { mnemonicWord } from "../../store/account/account.interface"
+import { RootState } from "../../store/rootState"
 
-const Step_3_SelectMnemonicWrap = styled.div`
-    display: grid;
-    grid-template-rows: repeat(4);
-    grid-template-columns: repeat(3, 6rem);
-    justify-content: center;
-    align-content: space-evenly;
-    grid-row-gap: 1rem;
-    grid-column-gap: 2rem;
-    width: 100%;
-    height: 100%;
-
-    & > div {
-        transition: all 0.2s;
-    }
-
-    & > .select {
-        background-color: #fff;
-        color: #000;
-    }
-`
-
-const Step_3_SelectMnemonic = styled.div`
-    height: 2.5rem;
-    text-align: center;
-    line-height: 2.5rem;
-    font-weight: 700;
-    border-radius: 1rem;
-    background-color: #9d9d9d;
-`
-
-export const Step_3_Content = () => {
+export const Step3 = () => {
     const {mnemonic} = useSelector((state: RootState) => state.accounts)
     const [shuffledMnemonic, setShuffledMnemonic] = useState([''])
     const [selectValue, setSeletValue] = useState('')

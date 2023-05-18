@@ -1,31 +1,13 @@
-import styled from "styled-components"
-import { Step_ContentWrap, Step_ContentSubject, Step_Contents, StepFormFooter } from "./Step_content.styled"
-import { EllipseBtn } from "../../../common/button"
-import { useNavigate } from "react-router-dom"
+import { Step_2_Mnemonic, Step_ContentWrap, Step_ContentSubject, Step_Contents, Step_2_MnemonicWrap, StepFormFooter } from "./styled"
 import { MouseEvent, useEffect } from "react"
-import request from "../../../utils/request"
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../../store/rootState"
-import { getMnemonics } from "../../../store/account"
+import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { EllipseBtn } from "../../common/button"
+import { getMnemonics } from "../../store/account"
+import { RootState } from "../../store/rootState"
+import request from "../../utils/request"
 
-const Step_2_MnemonicWrap = styled.div`
-    width: 80%;
-    height: 60%;
-    border: 1px solid #9d9d9d;
-    border-radius: 1rem;
-    background-color: #5d5d5d;
-`
-
-const Step_2_Mnemonic = styled.div`
-    display: inline-block;
-    width: 33%;
-    height: 25%;
-    font-weight: 700;
-    text-align: center;
-    line-height: 3rem;
-`
-
-export const Step_2_Content = () => {
+export const Step2 = () => {
     const { mnemonic } = useSelector((state: RootState) => state.accounts)
     const navigate = useNavigate()
     const dispatch = useDispatch()

@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom"
-import { EllipseBtn } from "../../common/button"
 import { HomeButtonWrap,  HomeLogoImg, HomeLogoWrap, HomeSubject } from "./styled"
+import { useNavigate } from "react-router-dom"
 import { MouseEvent } from "react"
+import { EllipseBtn } from "../../common/button"
 
 
 export const Home = () => {
@@ -14,6 +14,7 @@ export const Home = () => {
     const handleClickAlready = (e: MouseEvent) => {
         navigate('/step1')
     }
+
     return (
         <>
             <HomeLogoWrap>
