@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const HomeLogoWrap = styled.div`
+export const HomeLogoWrap = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,19 +9,10 @@ const HomeLogoWrap = styled.div`
     height: 60%;
 `
 
-const HomeLogoImg = styled.img`
+export const HomeLogoImg = styled.img`
     height: 60%;
 `
 
-const HomeSubject = styled.h1`
+export const HomeSubject = styled.h1`
     margin-top: 1rem;
 `
-
-export const HomeLogo = () => {
-    return(
-        <HomeLogoWrap>
-            <HomeLogoImg src="wallet.png"/>
-            <HomeSubject>Charlies Wallet</HomeSubject>
-        </HomeLogoWrap>
-    )
-}
