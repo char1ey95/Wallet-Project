@@ -15,7 +15,7 @@ class WalletServer {
         }
     }
 
-    async getAllWallet(req: Request, res: Response) {
+    async getAllAccountInfo(req: Request, res: Response) {
         try {
             const accountsList = this.wallet.getAccountInfo()
             res.json({ accountsList })
@@ -47,7 +47,7 @@ class WalletServer {
         }
     }
 
-    async getCreateWallet(req: Request, res: Response) {
+    async getCreateAccount(req: Request, res: Response) {
         try {
             const account = this.wallet.create()
             const { data: { balance } } = await this.axios.post(`/getBalance`, {
