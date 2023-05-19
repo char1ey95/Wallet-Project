@@ -16,7 +16,6 @@ export const Assets = () => {
 	const { wallet, mnemonic } = useSelector((state: RootState) => state)
 	const dispatch = useDispatch()
 
-	console.log(wallet)
 	const getWallet = async () => {
 		try {
 			dispatch(requestWallet({ type: WALLET_REQUEST }))

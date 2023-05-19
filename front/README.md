@@ -33,3 +33,7 @@ const request = async () => {
 - useState 문제
 
 ## 2. 니모닉 활용 로직 구상 필요
+
+## 3. 계정 생성시 첫번째 account 생성 및 account로 dispatch 하기
+
+## 4. wallet의 모든 계정정보 balance값 요청하기
