@@ -1,8 +1,9 @@
 import { combineReducers } from "redux"
-import { accounts } from "./account"
+// import { accounts } from "./account"
 import { wallet } from "./wallet"
+import { mnemonic } from "./mnemonic"
 
 
 export const rootReducer = combineReducers({
-    accounts, wallet
+    wallet, mnemonic
 })

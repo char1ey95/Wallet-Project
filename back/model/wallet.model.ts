@@ -22,6 +22,7 @@ export default class User extends Model {
     public password?: string;
 
     @AllowNull(false)
+    @Default(1)
     @Column({
         type: DataType.INTEGER,
     })

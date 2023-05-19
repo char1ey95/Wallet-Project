@@ -1,4 +1,4 @@
-import express, { request } from 'express'
+import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import App from './app'
@@ -14,4 +14,4 @@ server.mount(cookieParser())
 server.mount(express.json())
 server.mount(router)
 
-server.listen(config.port, sequelize, true)
+server.listen(config.port, sequelize, false)

@@ -27,6 +27,7 @@ class WalletServer {
 
     async getMnemonic(req: Request, res: Response) {
         try {
+            console.log(req)
             const mnemonic = this.wallet.getMnemonic()
             res.json({ mnemonic })
         } catch (e) {
