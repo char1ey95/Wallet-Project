@@ -19,9 +19,9 @@ class DigitalSignature {
         return mnemonic
     }
 
-    createPrivateKeyByMnemonic(mnemonic: string) {
-        const privateKey = this.crypto.SHA256(mnemonic)
-        return privateKey
+    createMasterKey(mnemonic: string) {
+        const masterKey = this.crypto.SHA256(mnemonic)
+        return masterKey
     }
 
     createPrivateKey() {

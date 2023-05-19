@@ -1,9 +1,16 @@
+import CryptoModule from "@crypto/crypto";
 import Wallet from '@wallet/wallet';
 import { AxiosInstance } from 'axios';
 import { Request, Response } from 'express';
+import { Model, ModelCtor } from "sequelize";
 
 class WalletServer {
-    constructor(private readonly wallet: Wallet, private readonly axios: AxiosInstance) { }
+    constructor(
+        private readonly wallet: Wallet,
+        private readonly axios: AxiosInstance,
+        private readonly crypto: CryptoModule,
+        private readonly model: ModelCtor<Model<any, any>>
+    ) { }
 
     async getWallet(req: Request, res: Response) {
         try {
@@ -28,7 +35,9 @@ class WalletServer {
     async getMnemonic(req: Request, res: Response) {
         try {
             const mnemonic = this.wallet.getMnemonic()
-            res.json({ mnemonic })
+            const mnemonics = mnemonic.split(" ")
+            const masterKey = this.wallet.getMasterKey(mnemonic)
+            res.json({ mnemonics, masterKey })
         } catch (e) {
             res.status(500)
         }
@@ -57,6 +66,20 @@ class WalletServer {
         } catch (e) {
             if (e instanceof Error) res.status(500).send(e.message)
             res.status(500)
+        }
+    }
+
+    async postJoin(req: Request, res: Response) {
+        try {
+            const { masterKey, password } = req.body
+            const hash = this.crypto.SHA256(masterKey + password)
+            const result = await this.model.create({ signature: hash })
+            if (!result.dataValues) throw new Error
+            res.json({ success: "성공" }).status(201)
+        } catch (e) {
+            if (e instanceof Error)
+                console.log(e.message)
+            res.json({ failed: "실패" })
         }
     }
 

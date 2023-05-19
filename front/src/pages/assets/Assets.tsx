@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { QRCodeSVG } from "qrcode.react"
 import { Icon } from "@iconify/react"
-import { createAccount, mineSuccess } from "../../store/account"
 import { Popup } from "../../common/popup"
 import request from "../../utils/request"
 import { RootState } from "../../store/rootState"
@@ -16,21 +15,21 @@ export const Assets = () => {
 	const wallet = useSelector((state: RootState) => state.wallet)
 	const dispatch = useDispatch()
 
-	useEffect(() => {
-		// dispatch({a:"asdf"})
-	}, [dispatch])
+	// useEffect(() => {
+	// 	dispatch(requestWallet())
+	// }, [dispatch])
 
 
-	console.log(wallet)
-	const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
+	// console.log(wallet)
+	// const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
 	const [open, setOpen] = useState(false)
-	const [copy, setCopy] = useState(selectedAccount.account)
+	// const [copy, setCopy] = useState(selectedAccount.account)
 	const navigate = useNavigate()
 
 	const getAmount = async () => {
 		try {
-			const { data } = await request.get(`/balance/${selectedAccount.account}`)
-			dispatch(mineSuccess(data))
+			// const { data } = await request.get(`/balance/${selectedAccount.account}`)
+			// dispatch(mineSuccess(data))
 		} catch (e) {
 			console.log(e)
 		}
@@ -38,8 +37,8 @@ export const Assets = () => {
 
 	const mineBlock = async () => {
 		try {
-			const { data } = await request.post('/mineBlock', { account: selectedAccount.account })
-			console.log(data)
+			// const { data } = await request.post('/mineBlock', { account: selectedAccount.account })
+			// console.log(data)
 			getAmount()
 			alert('블럭이 생성되었습니다!')
 		} catch (e) {
@@ -64,14 +63,14 @@ export const Assets = () => {
 	}
 
 	const handleClickCopy = (e: MouseEvent) => {
-		setCopy(selectedAccount.account)
-		alert(`${copy}가 복사되었습니다.`)
+		// setCopy(selectedAccount.account)
+		// alert(`${copy}가 복사되었습니다.`)
 	}
 
 	const newAccount = async () => {
 		try {
 			const { data } = await request.get('/wallet')
-			dispatch(createAccount(data))
+			// dispatch(createAccount(data))
 		} catch (e) {
 			// dispatch()
 		}
@@ -97,10 +96,10 @@ export const Assets = () => {
 			<AssetsHeaderWrap>
 				<AssetsHeaderContents>
 					<AssetsHeaderAccountsList onClick={handleClickOpen}>
-						<QRCodeSVG value={selectedAccount.account} width="24" height="24"></QRCodeSVG>
+						{/* <QRCodeSVG value={selectedAccount.account} width="24" height="24"></QRCodeSVG>
 						<AssetsHeaderAccountsName>
 							{selectedAccount.account.substring(0, 6) + '...' + selectedAccount.account.substring(36, 40)}
-						</AssetsHeaderAccountsName>
+						</AssetsHeaderAccountsName> */}
 					</AssetsHeaderAccountsList>
 					<AssetsHeaderAccountBtnWarp>
 						<AssetsHeaderAccountCopyBtn onClick={handleClickCopy}>
@@ -116,7 +115,7 @@ export const Assets = () => {
 				</AssetsHeaderContents>
 			</AssetsHeaderWrap>
 			<AssetsAmountsWrapper>
-				<AssetsAmount>{selectedAccount.balance} ETH</AssetsAmount>
+				{/* <AssetsAmount>{selectedAccount.balance} ETH</AssetsAmount> */}
 			</AssetsAmountsWrapper>
 			<AssetsFunctionsWrapper>
 				<DarkInput placeholder='송금할 계좌를 입력해주세요' />

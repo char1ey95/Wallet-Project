@@ -1,18 +1,27 @@
+import { Step4_Form, StepContentWrap, StepContentSubject, StepContents, InputWrap, StepFormFooter } from "./styled";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { EllipseBtn } from "../../common/button";
 import { DarkInput } from "../../common/input";
-import { Step4_Form, StepContentWrap, StepContentSubject, StepContents, InputWrap, StepFormFooter } from "./styled";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/rootState";
+import request from "../../utils/request";
 
 export const Step4 = () => {
-    const navigate = useNavigate()
+    const { mnemonic } = useSelector((state: RootState) => state)
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate()
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        if(password !== confirmPassword) alert('비밀번호가 일치하지 않습니다.')
-        if(password === confirmPassword) navigate('/assets')
+        if (password.length <= 8) alert("비밀번호는 8글자 이상으로 입력해주세요.")
+        if (password !== confirmPassword) alert('비밀번호가 일치하지 않습니다.')
+
+        const { data } = await request.post('/join', { masterKey: mnemonic.masterKey, password })
+        if (data.failed) return alert("천문학적 확률로 해시값이 중복되었습니다.")
+
+        navigate('/assets')
     };
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {

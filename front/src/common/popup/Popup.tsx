@@ -3,7 +3,6 @@ import { QRCodeSVG } from "qrcode.react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/rootState";
 import { MouseEvent, useState } from "react";
-import { account } from "../../store/account/account.interface";
 import request from "../../utils/request";
 
 const PopupWrap = styled.div`
@@ -60,34 +59,34 @@ interface PopupProps {
 }
 
 export const Popup: React.FC<PopupProps> = ({setOpen}) => {
-    const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts)
-    const [balance, setBalance] = useState({})
-    const dispatch = useDispatch()
+    // const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts)
+    // const [balance, setBalance] = useState({})
+    // const dispatch = useDispatch()
 
-    const getBalance = async (account: account) => {
-        try {
-            const { data } = await request.get(`/balance/${account}`)
-            setBalance(data)
-        } catch (e) {
+    // const getBalance = async (account: account) => {
+    //     try {
+    //         const { data } = await request.get(`/balance/${account}`)
+    //         setBalance(data)
+    //     } catch (e) {
             
-        }
-    }
+    //     }
+    // }
 
-    const handleClickSelectAccount = (e: MouseEvent) => {
-        const account = e.target as HTMLElement
-        const findValue = account.innerHTML.substring(0, 6)
-        const [selectOne] = accounts.filter((v) => v.account.substring(0, 6) === findValue)
-        getBalance(selectOne.account)
-        // dispatch(selectAccount())
-        setOpen(false)
-    }
+    // const handleClickSelectAccount = (e: MouseEvent) => {
+    //     const account = e.target as HTMLElement
+    //     const findValue = account.innerHTML.substring(0, 6)
+    //     const [selectOne] = accounts.filter((v) => v.account.substring(0, 6) === findValue)
+    //     getBalance(selectOne.account)
+    //     // dispatch(selectAccount())
+    //     setOpen(false)
+    // }
 
     return (
         <PopupWrap>
             <PopupHeader>
                 <PopupHeaderName>Accounts</PopupHeaderName>
             </PopupHeader>
-            <PopupContents onClick={handleClickSelectAccount}>
+            {/* <PopupContents onClick={handleClickSelectAccount}>
                 {accounts.map((account, index) => {
                     if (index === 0 && account.account.length === 0) return <input type="hidden" key={index}></input>
                     return (
@@ -97,7 +96,7 @@ export const Popup: React.FC<PopupProps> = ({setOpen}) => {
                         </PopupContentWrap>
                     )
                 })}
-            </PopupContents>
+            </PopupContents> */}
         </PopupWrap>
     );
 };

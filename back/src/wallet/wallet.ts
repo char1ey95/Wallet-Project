@@ -20,10 +20,14 @@ class Wallet {
         return accounts
     }
 
-    public getMnemonic(): string[]{
-        const words = this.digitalSignature.createMnemonic()
-        const mnemonic = words.split(" ")
+    public getMnemonic(): string{
+        const mnemonic = this.digitalSignature.createMnemonic()
         return mnemonic
+    }
+
+    public getMasterKey(mnemonic: string): string {
+        const masterKey = this.digitalSignature.createMasterKey(mnemonic)
+        return masterKey
     }
 
     public getAccountInfo(): Accounts[] {

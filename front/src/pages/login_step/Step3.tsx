@@ -1,13 +1,14 @@
+import { Step3_SelectMnemonic, StepContentWrap, StepContentSubject, StepContents, Step3_SelectMnemonicWrap, StepFormFooter } from "./styled"
 import { useState, useEffect, MouseEvent } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { EllipseBtn } from "../../common/button"
-import { mnemonicWord } from "../../store/account/account.interface"
 import { RootState } from "../../store/rootState"
-import { Step3_SelectMnemonic, StepContentWrap, StepContentSubject, StepContents, Step3_SelectMnemonicWrap, StepFormFooter } from "./styled"
+import { Mnemonic } from "../../store/interface"
+import { ErrorPage } from "../../common/error"
 
 export const Step3 = () => {
-    const {mnemonic} = useSelector((state: RootState) => state.accounts)
+    const { mnemonic } = useSelector((state: RootState) => state)
     const [shuffledMnemonic, setShuffledMnemonic] = useState([''])
     const [selectValue, setSeletValue] = useState('')
     const navigate = useNavigate()
@@ -19,7 +20,9 @@ export const Step3 = () => {
     }
 
     const handleClickStep2 = (e: MouseEvent) => {
-        (selectValue === mnemonic[mnemonic.length - 1]) ? navigate('/step4') : alert('다시 선택해주세요')
+        (selectValue === mnemonic.mnemonics[mnemonic.mnemonics.length - 1])
+            ? navigate('/step4')
+            : alert('다시 선택해주세요')
     }
 
     const renderMnemonic = (mnemonic: string[]) => {
@@ -30,7 +33,7 @@ export const Step3 = () => {
         return divs
     }
 
-    const shuffleWords = (mnemonic: mnemonicWord[]): mnemonicWord[] => {
+    const shuffleWords = (mnemonic: Mnemonic[]): Mnemonic[] => {
         const shuffled = [...mnemonic];
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -40,9 +43,10 @@ export const Step3 = () => {
     }
 
     useEffect(() => {
-        setShuffledMnemonic(shuffleWords(mnemonic))
+        setShuffledMnemonic(shuffleWords(mnemonic.mnemonics))
     }, [])
 
+    if (mnemonic.mnemonics.length !== 12) return <ErrorPage code={404} />
     return (
         <>
             <StepContentWrap>
