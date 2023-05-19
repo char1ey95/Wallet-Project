@@ -13,5 +13,5 @@ export interface MnemonicData {
 
 export interface MnemonicAction {
     type: string
-    payload?: MnemonicData | string
+    payload?: MnemonicData | MasterKey | error
 }

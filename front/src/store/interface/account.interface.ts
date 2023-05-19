@@ -19,5 +19,5 @@ export interface AccountData {
 
 export interface AccountAction {
     type: string
-    payload?: AccountData | string
+    payload?: AccountData | error
 }

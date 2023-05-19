@@ -10,8 +10,8 @@ const config = {
     api_protocol: process.env.API_PROTOCOl || 'http',
     db: {
         development: {
-            username: process.env.DB_USER || "root",
-            password: process.env.DB_PASSWORD || "Rkd08217!",
+            username: process.env.DB_USER || "char1ey",
+            password: process.env.DB_PASSWORD || "Abcd1234!",
             database: process.env.DB_DATABASE || "Wallet",
             port: process.env.DB_PORT || 3306,
             host: process.env.DB_HOST || "localhost",

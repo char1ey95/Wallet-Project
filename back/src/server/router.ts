@@ -3,7 +3,7 @@ import walletServer from './server.module'
 
 const router = Router()
 
-router.get('/', (req, res) => walletServer.getWallet(req, res))
+router.get('/wallet', (req, res) => walletServer.getWallet(req, res))
 router.get('/newAccount', (req, res) => walletServer.getCreateAccount(req, res))
 router.get('/walletInfo', (req, res) => walletServer.getAllAccountInfo(req, res))
 router.get('/mnemonic', (req, res) => walletServer.getMnemonic(req, res))

@@ -1,3 +1,4 @@
+import { ActionType } from "../interface";
 import { MnemonicState } from "../interface/mnemonic.interface";
 import { MNEMONIC_REQUEST, MNEMONIC_SUCCESS, MNEMONIC_FAILURE } from "./types";
 
@@ -8,7 +9,7 @@ const initialState: MnemonicState = {
 	masterKey: ""
 };
 
-export const mnemonic = (state = initialState, action: { type: string; payload: MnemonicState }) => {
+export const mnemonic = (state = initialState, action: { type: ActionType; payload: MnemonicState }) => {
 	console.log("action::", action.payload)
 	switch (action.type) {
 		case MNEMONIC_REQUEST:

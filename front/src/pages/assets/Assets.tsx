@@ -9,19 +9,37 @@ import request from "../../utils/request"
 import { RootState } from "../../store/rootState"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
+import { WALLET_FAILURE, WALLET_REQUEST, WALLET_SUCCESS, failureWallet } from "../../store/wallet"
 // import { requestWallet } from "../../store/wallet"
 
 export const Assets = () => {
-	const wallet = useSelector((state: RootState) => state.wallet)
+	const { wallet, mnemonic } = useSelector((state: RootState) => state)
 	const dispatch = useDispatch()
 
-	// useEffect(() => {
-	// 	dispatch(requestWallet())
-	// }, [dispatch])
+	console.log(wallet)
+	const getWallet = async () => {
+		try {
+			dispatch(requestWallet({ type: WALLET_REQUEST }))
+			const { data } = await request.get('/wallet')
+			dispatch(successWallet({ type: WALLET_SUCCESS, payload: data }))
+		} catch (e) {
+			if(e instanceof Error)
+			dispatch(failureWallet({ type: WALLET_FAILURE, payload: e.message }))
+		}
+	}
 
 
-	// console.log(wallet)
-	// const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts);
+
+
+
+
+
+
+
+
+
+
+
 	const [open, setOpen] = useState(false)
 	// const [copy, setCopy] = useState(selectedAccount.account)
 	const navigate = useNavigate()
@@ -125,3 +143,11 @@ export const Assets = () => {
 		</>
 	)
 }
+
+function requestWallet(arg0: { type: string }): any {
+	throw new Error("Function not implemented.")
+}
+function successWallet(arg0: { type: string; payload: any }): any {
+	throw new Error("Function not implemented.")
+}
+

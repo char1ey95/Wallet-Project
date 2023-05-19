@@ -1,5 +1,5 @@
 import DigitalSignature from "./digitalSignature"
-import { Accounts, Receipt } from "./wallet.interface"
+import { Accounts, KeyIndex, MasterKey, Receipt } from "./wallet.interface"
 
 class Wallet {
     private readonly accounts: Accounts[] = []
@@ -7,6 +7,21 @@ class Wallet {
 
     public create(): Accounts {
         const privateKey = this.digitalSignature.createPrivateKey()
+        const publicKey = this.digitalSignature.createPublicKey(privateKey)
+        const account = this.digitalSignature.createAccount(publicKey)
+
+        const accounts: Accounts = {
+            account,
+            publicKey,
+            privateKey,
+        }
+
+        this.accounts.push(accounts)
+        return accounts
+    }
+
+    public createByMasterKey(masterKey: MasterKey, index: KeyIndex): Accounts {
+        const privateKey = this.digitalSignature.createPrivateKeyByMasterKey(masterKey + index)
         const publicKey = this.digitalSignature.createPublicKey(privateKey)
         const account = this.digitalSignature.createAccount(publicKey)
 

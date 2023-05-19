@@ -1,7 +1,7 @@
 import { randomBytes } from "crypto"
 import elliptic from "elliptic"
 import CryptoModule from 'crypto/crypto'
-import { Receipt } from "./wallet.interface"
+import { MasterKeyIndex, Receipt } from "./wallet.interface"
 import * as bip39 from 'bip39'
 
 class DigitalSignature {
@@ -17,6 +17,11 @@ class DigitalSignature {
         const mnemonic = bip39.entropyToMnemonic(entropy)
 
         return mnemonic
+    }
+
+    createPrivateKeyByMasterKey(masterKeyIndex: MasterKeyIndex){
+        const privateKey = this.crypto.SHA256(masterKeyIndex)
+        return privateKey
     }
 
     createMasterKey(mnemonic: string) {

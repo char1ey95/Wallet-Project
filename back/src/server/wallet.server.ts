@@ -74,8 +74,11 @@ class WalletServer {
             const { masterKey, password } = req.body
             const hash = this.crypto.SHA256(masterKey + password)
             const result = await this.model.create({ signature: hash })
+            const account = this.wallet.createByMasterKey(masterKey, 1)
+            account.balance = 0
+            console.log(account)
             if (!result.dataValues) throw new Error
-            res.json({ success: "성공" }).status(201)
+            res.json({ account }).status(201)
         } catch (e) {
             if (e instanceof Error)
                 console.log(e.message)

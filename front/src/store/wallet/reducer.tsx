@@ -1,5 +1,5 @@
-import { GET_WALLET_FAILURE, GET_WALLET_REQUEST, GET_WALLET_SUCCESS } from "."
-import { WalletState } from "../interface"
+import { WALLET_FAILURE, WALLET_REQUEST, WALLET_SUCCESS } from "."
+import { ActionType, WalletState } from "../interface"
 
 const initialState: WalletState = {
 	isLoading: true,
@@ -7,33 +7,33 @@ const initialState: WalletState = {
 	wallet: [
 		{
 			account: "",
-			balance: 0,
 			privateKey: "",
 			publicKey: "",
+			balance: 0,
 		},
 	]
 };
 
-export const wallet = (state = initialState, action: { type: string; payload: any }) => {
+export const wallet = (state = initialState, action: { type: ActionType; payload: WalletState }) => {
 	console.log("action::", action)
 	switch (action.type) {
-		case GET_WALLET_REQUEST:
+		case WALLET_REQUEST:
 			return {
 				...state,
 				isLoading: true
 			}
-		case GET_WALLET_SUCCESS:
+		case WALLET_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
 				isError: null,
-				accounts: [...state.wallet, action.payload]
+				wallet: [...state.wallet, action.payload]
 			}
-		case GET_WALLET_FAILURE:
+		case WALLET_FAILURE:
 			return {
 				...state,
 				isLoading: false,
-				isError: action.payload.e,
+				isError: action.payload.isError,
 			}
 		default:
 			return state;

@@ -1,19 +1,6 @@
-import { ThunkAction } from "redux-thunk";
-import { Action } from "redux";
-import request from "../../utils/request";
-import { WalletState } from "../interface";
-import { GET_WALLET_FAILURE, GET_WALLET_REQUEST, GET_WALLET_SUCCESS } from ".";
-import { RootState } from "../rootState";
-import { useDispatch } from "react-redux";
+import { WALLET_FAILURE, WALLET_REQUEST, WALLET_SUCCESS } from "./types"
+import { WalletAction } from "../interface"
 
-// export const requestWallet = () => async () => {
-//     dispatch({ type: GET_WALLET_REQUEST });
-
-//     try {
-//         const { data } = await request.get('/')
-//         console.log(data)
-//         dispatch({ type: GET_WALLET_SUCCESS, payload: data });
-//     } catch (error) {
-//         dispatch({ type: GET_WALLET_FAILURE, error: '계정의 지갑 정보를 불러오는데 실패했습니다.' });
-//     }
-// };
+export const requestWallet = (action: WalletAction) => ({ type: WALLET_REQUEST})
+export const successWallet = (action: WalletAction) => ({ type: WALLET_SUCCESS, payload: action.payload})
+export const failureWallet = (action: WalletAction) => ({ type: WALLET_FAILURE, payload: action.payload})

@@ -26,6 +26,23 @@ describe('DigitalSignature', () => {
         })
     })
 
+    describe('createPrivateKeyByMasterKey', () => {
+        it("마스터키로 만든 개인키가 64글자인가", () => {
+            const mnemonic = digitalSignature.createMnemonic()
+            const masterKey = digitalSignature.createMasterKey(mnemonic)
+            const privateKey = digitalSignature.createPrivateKeyByMasterKey(masterKey+1)
+            expect(privateKey.length).toBe(64)
+        })
+    })
+
+    describe('createMasterKey', () => {
+        it("마스터키가 64글자인가", () => {
+            const mnemonic = digitalSignature.createMnemonic()
+            const masterKey = digitalSignature.createMasterKey(mnemonic)
+            expect(masterKey.length).toBe(64)
+        })
+    })
+
     describe('createPrivateKey', () => {
         it('개인키의 길이가 64글자인가', () => {
             const privateKey = digitalSignature.createPrivateKey()

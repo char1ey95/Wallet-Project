@@ -1,5 +1,5 @@
 import { ACCOUNT_REQUEST, ACCOUNT_SUCCESS, ACCOUNT_FAILURE } from "./types";
-import { AccountState } from "../interface";
+import { AccountState, ActionType } from "../interface";
 
 const initialState: AccountState = {
 	isLoading: true,
@@ -12,7 +12,7 @@ const initialState: AccountState = {
 	}
 };
 
-export const account = (state = initialState, action: { type: string; payload: AccountState }) => {
+export const account = (state = initialState, action: { type: ActionType; payload: AccountState }) => {
 	console.log("action::", action)
 	switch (action.type) {
 		case ACCOUNT_REQUEST:
