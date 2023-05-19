@@ -1,70 +1,39 @@
-// import { AccountState, AccountsPayload, InitialState } from "./account.interface";
-// import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_SUCCESS, GET_ACCOUNT_FAILURE, GET_ACCOUNT_SUCCESS, MINING_FAILURE, MINING_SUCCESS, MNEMONIC_FAILURE, MNEMONIC_SUCCESS, SELECT_ACCOUNT_FAILURE, SELECT_ACCOUNT_SUCCESS } from "./selector";
+import { ACCOUNT_REQUEST, ACCOUNT_SUCCESS, ACCOUNT_FAILURE } from "./types";
+import { AccountState } from "../interface";
 
-// const initialState: InitialState = {
-// 	isLoading: true,
-// 	isError: null,
-// 	accounts: [
-// 		{
-// 			account: "",
-// 			balance: 0,
-// 			privateKey: "",
-// 			publicKey: "",
-// 		},
-// 	],
-// 	selectedAccount: {
-// 		account: "",
-// 		balance: 0,
-// 		privateKey: "",
-// 		publicKey: "",
-// 	},
-// 	mnemonic: [""]
-// };
+const initialState: AccountState = {
+	isLoading: true,
+	isError: null,
+	accountInfo: {
+		account: "",
+		privateKey: "",
+		publicKey: "",
+		balance: 0
+	}
+};
 
-// export const accounts = (state = initialState, action: { type: string; payload: AccountsPayload }) => {
-// 	switch (action.type) {
-// 		case CREATE_ACCOUNT_SUCCESS:
-// 			return {
-// 				...state,
-// 				isLoading: false,
-// 				isError: null,
-// 				accounts: [...state.accounts, action.payload],
-// 				selectedAccount: action.payload,
-// 			}
-// 		case CREATE_ACCOUNT_FAILURE:
-// 			return { ...state, isLoading: true, isError: "" }
-// 		case SELECT_ACCOUNT_SUCCESS:
-// 			return {
-// 				...state,
-// 				isLoading: false,
-// 				isError: null,
-// 				selectedAccount: action.payload
-// 			};
-// 		case SELECT_ACCOUNT_FAILURE:
-// 			return { ...state, isLoading: true, isError: "" }
-// 		case GET_ACCOUNT_SUCCESS:
-// 			return {
-// 				...state,
-// 				isLoading: false,
-// 				isError: null,
-// 				accounts: [...action.payload as AccountState[]]
-// 			}
-// 		case GET_ACCOUNT_FAILURE:
-// 			return { ...state, isLoading: true, isError: "" }
-// 		case MINING_SUCCESS:
-// 			return {
-// 				...state,
-// 				isLoading: false,
-// 				isError: null,
-// 				selectedAccount: action.payload
-// 			}
-// 		case MINING_FAILURE:
-// 			return {...state, isLoading: true, isError: "" }
-// 		case MNEMONIC_SUCCESS:
-// 			return {...state, isLoading: false, isError: null, mnemonic: action.payload}
-// 		case MNEMONIC_FAILURE:
-// 			return {...state, isLoading: true, isError: "" }
-// 		default:
-// 			return state;
-// 	}
-// };
+export const account = (state = initialState, action: { type: string; payload: AccountState }) => {
+	console.log("action::", action)
+	switch (action.type) {
+		case ACCOUNT_REQUEST:
+			return {
+				...state,
+				isLoading: true
+			}
+		case ACCOUNT_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				isError: null,
+				accountInfo: {...action.payload.accountInfo}
+			}
+		case ACCOUNT_FAILURE:
+			return {
+				...state,
+				isLoading: false,
+				isError: action.payload.isError,
+			}
+		default:
+			return state;
+	}
+};

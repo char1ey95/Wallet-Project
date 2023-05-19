@@ -1,8 +1,23 @@
-import { account, balance, privateKey, publicKey } from "."
+import { account, balance, error, loadding, privateKey, publicKey } from "."
 
 export interface Account{
     account: account
-    balance: balance
     privateKey: privateKey
     publicKey: publicKey
+    balance: balance
+}
+
+export interface AccountState{
+    isLoading: loadding
+    isError: error
+    accountInfo: Account
+}
+
+export interface AccountData {
+    data: AccountState
+}
+
+export interface AccountAction {
+    type: string
+    payload?: AccountData | string
 }
