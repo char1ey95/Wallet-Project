@@ -13,7 +13,6 @@ export const Step2 = () => {
     const { mnemonic } = useSelector((state: RootState) => state)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    console.log(mnemonic)
 
     const getMnemonic = async () => {
         try {
@@ -41,12 +40,11 @@ export const Step2 = () => {
     }
 
     useEffect(() => {
-        getMnemonic()
-        // if (mnemonic.mnemonics.length !== 12)
+        if (mnemonic.mnemonics.length !== 12) getMnemonic()
     }, [])
 
-    if( mnemonic.isLoading ) return <LoadingCircle />
-    if( mnemonic.isError ) return <ErrorPage code={404} />
+    if (mnemonic.isLoading) return <LoadingCircle />
+    if (mnemonic.isError) return <ErrorPage code={404} />
     return (
         <>
             <StepContentWrap>

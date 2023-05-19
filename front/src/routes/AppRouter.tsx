@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { Assets, Home, Login, Step } from "../pages"
+import {  Home, Login, Step } from "../pages"
 
 export const AppRouter = () => {
     return(
@@ -10,7 +10,7 @@ export const AppRouter = () => {
             <Route path='/step3' element={<Step step={3} previous={'step2'}/>} />
             <Route path='/step4' element={<Step step={4} previous={'step3'}/>} />
             <Route path='/login' element={<Login />} />
-            <Route path='/assets' element={<Assets />} />
+            {/* <Route path='/assets' element={<Assets />} /> */}
         </Routes>
     )
 }

@@ -9,7 +9,7 @@ const initialState: MnemonicState = {
 };
 
 export const mnemonic = (state = initialState, action: { type: string; payload: MnemonicState }) => {
-	console.log("action::", action)
+	console.log("action::", action.payload)
 	switch (action.type) {
 		case MNEMONIC_REQUEST:
 			return {
