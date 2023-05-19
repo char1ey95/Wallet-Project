@@ -18,8 +18,7 @@ export const Step2 = () => {
         try {
             dispatch(requestMnemonic({ type: MNEMONIC_REQUEST }))
             const { data } = await request.get('/mnemonic')
-            console.log(data)
-            if (!(data as string[])) throw Error("니모닉 단어를 불러오지 못했습니다.")
+            // if (!(data as string[])) throw Error("니모닉 단어를 불러오지 못했습니다.")
             dispatch(successMnemonic({ type: MNEMONIC_SUCCESS, payload: data }))
         } catch (e) {
             if (e instanceof Error)

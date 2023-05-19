@@ -21,7 +21,7 @@ describe('DigitalSignature', () => {
     describe('createPrivateKeyByMnemonic', () => {
         it("니모닉으로 만든 개인키가 64글자인가", () => {
             const mnemonic = digitalSignature.createMnemonic()
-            const privateKey = digitalSignature.createPrivateKeyByMnemonic(mnemonic)
+            const privateKey = digitalSignature.createMasterKey(mnemonic)
             expect(privateKey.length).toBe(64)
         })
     })
