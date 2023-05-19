@@ -1,16 +1,18 @@
 {
-    "compilerOptions": {
-        "outDir": "./build",
-        "module": "CommonJS",
-        "esModuleInterop": true,
-        "target": "ES6",
-        "strict": true,
-        "baseUrl": "./src",
-        "paths": {
-            "@crypto/*":["crypto/*"],
-            "@wallet/*":["wallet/*"],
-            "@server/*":["server/*"],
-            "@utils/*":["utils/*"]
-        }
-    }
+	"compilerOptions": {
+		"outDir": "./build",
+		"module": "CommonJS",
+		"esModuleInterop": true,
+		"target": "ES6",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"strict": true,
+		"baseUrl": "./src",
+		"paths": {
+			"@crypto/*": ["crypto/*"],
+			"@wallet/*": ["wallet/*"],
+			"@server/*": ["server/*"],
+			"@utils/*": ["utils/*"]
+		}
+	}
 }
