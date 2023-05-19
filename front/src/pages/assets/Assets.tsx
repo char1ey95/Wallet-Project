@@ -10,14 +10,14 @@ import request from "../../utils/request"
 import { RootState } from "../../store/rootState"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
-import { requestWallet } from "../../store/wallet"
+// import { requestWallet } from "../../store/wallet"
 
 export const Assets = () => {
 	const wallet = useSelector((state: RootState) => state.wallet)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(requestWallet())
+		// dispatch({a:"asdf"})
 	}, [dispatch])
 
 
