@@ -1,7 +1,15 @@
 import { Step1_ContentsInput, StepContentWrap, StepContentSubject, Step1_Contents, StepFormFooter } from "./styled"
 import { EllipseBtn } from "../../common/button"
+import React from "react"
+import { useNavigate } from "react-router-dom"
 
 export const Step1 = () => {
+    const navigate = useNavigate()
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        navigate('/login')
+    }
 
     const renderInput = () => {
         const Inputs = []
@@ -20,7 +28,7 @@ export const Step1 = () => {
                 </Step1_Contents>
             </StepContentWrap>
             <StepFormFooter>
-                <EllipseBtn>Submit</EllipseBtn>
+                <EllipseBtn onClick={handleClick}>Submit</EllipseBtn>
             </StepFormFooter>
         </>
     )

@@ -63,6 +63,8 @@ const request = async () => {
 
 ## 7. 로그인 구현하기
 - 니모닉을 입력받는다.
+    - 입력받은 니모닉은 mnemonic에 넣는다.
+    - masterKey를 만든다.
 - 비밀번호를 입력받는다.
 - 둘다 입력받아 해쉬화하여 데이터베이와 비교한다
 - 일치하는 accountsNumber를 가져온다.

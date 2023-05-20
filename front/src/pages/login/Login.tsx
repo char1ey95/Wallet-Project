@@ -2,8 +2,14 @@ import { LoginBoxWrapper, LoginBtnWrap, LoginForgotWrap, LoginHeaderIcon, LoginH
 import { Icon } from "@iconify/react"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
+import React from "react"
 
 export const Login = () => {
+
+    const handleClickForgot = (e: React.MouseEvent) => {
+        alert("어쩔수 없습니다..")
+    }
+
     return (
         <>
             <LoginHeaderWrapper>
@@ -24,7 +30,7 @@ export const Login = () => {
                     <EllipseBtn>Unlock</EllipseBtn>
                 </LoginBtnWrap>
                 <LoginForgotWrap>
-                    <EllipseBtn color={'black'}>Forgot password</EllipseBtn>
+                    <EllipseBtn color={'black'} onClick={handleClickForgot}>Forgot password</EllipseBtn>
                 </LoginForgotWrap>
             </LoginBoxWrapper>
         </>
