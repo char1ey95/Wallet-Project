@@ -1,4 +1,4 @@
-import { ACCOUNT_REQUEST, ACCOUNT_SUCCESS, ACCOUNT_FAILURE } from "./types";
+import { ACCOUNT_REQUEST, ACCOUNT_SUCCESS, ACCOUNT_FAILURE, SELECT_ACCOUNT_FAILURE, SELECT_ACCOUNT_REQUEST, SELECT_ACCOUNT_SUCCESS } from "./types";
 import { AccountState, ActionType } from "../interface";
 
 const initialState: AccountState = {
@@ -28,6 +28,24 @@ export const account = (state = initialState, action: { type: ActionType; payloa
 				accountInfo: {...action.payload}
 			}
 		case ACCOUNT_FAILURE:
+			return {
+				...state,
+				isLoading: false,
+				isError: action.payload.isError,
+			}
+		case SELECT_ACCOUNT_REQUEST:
+			return {
+				...state,
+				isLoading: true
+			}
+		case SELECT_ACCOUNT_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				isError: null,
+				accountInfo: {...action.payload}
+			}
+		case SELECT_ACCOUNT_FAILURE:
 			return {
 				...state,
 				isLoading: false,

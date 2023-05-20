@@ -1,7 +1,9 @@
 import { AssetsAmount, AssetsAmountsWrapper, AssetsFunctionsWrapper, AssetsHeaderAccountAddBtn, AssetsHeaderAccountBtnWarp, AssetsHeaderAccountCancelBtn, AssetsHeaderAccountCopyBtn, AssetsHeaderAccountsList, AssetsHeaderAccountsName, AssetsHeaderContents, AssetsHeaderWrap } from "./styled"
-import { MouseEvent, useEffect, useState } from "react"
+import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_REQUEST, CREATE_ACCOUNT_SUCCESS } from "../../store/wallet"
+import { ACCOUNT_SUCCESS } from "../../store/account"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { MouseEvent, useState } from "react"
 import { QRCodeSVG } from "qrcode.react"
 import { Icon } from "@iconify/react"
 import { Popup } from "../../common/popup"
@@ -9,12 +11,12 @@ import request from "../../utils/request"
 import { RootState } from "../../store/rootState"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
-import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_REQUEST, CREATE_ACCOUNT_SUCCESS } from "../../store/wallet"
-import { ACCOUNT_SUCCESS } from "../../store/account"
-// import { requestWallet } from "../../store/wallet"
 
 export const Assets = () => {
 	const { wallet, mnemonic, account } = useSelector((state: RootState) => state)
+	const [open, setOpen] = useState(false)
+	const [copy, setCopy] = useState(account.accountInfo.account)
+	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
 	const createNewAccount = async () => {
@@ -25,7 +27,7 @@ export const Assets = () => {
 				index: wallet.accountsNumber + 1,
 				signature: document.cookie.split("=")[1]
 			})
-			if (data.error) throw new Error ( data.error )
+			if (data.error) throw new Error(data.error)
 			data.accountsNumber = data.accountsNumber.accountsNumber
 			dispatch({ type: CREATE_ACCOUNT_SUCCESS, payload: data })
 			dispatch({ type: ACCOUNT_SUCCESS, payload: data.wallet })
@@ -36,24 +38,10 @@ export const Assets = () => {
 		}
 	}
 
-	const [open, setOpen] = useState(false)
-	const [copy, setCopy] = useState(account.accountInfo.account)
-	const navigate = useNavigate()
-
-	const getAmount = async () => {
-		try {
-			// const { data } = await request.get(`/balance/${selectedAccount.account}`)
-			// dispatch(mineSuccess(data))
-		} catch (e) {
-			console.log(e)
-		}
-	}
-
 	const mineBlock = async () => {
 		try {
-			// const { data } = await request.post('/mineBlock', { account: selectedAccount.account })
-			// console.log(data)
-			getAmount()
+			const { data } = await request.post('/mineBlock', { account: account.accountInfo.account })
+			console.log(data)
 			alert('블럭이 생성되었습니다!')
 		} catch (e) {
 			alert('블럭을 생성하지 못하였습니다!')
@@ -77,23 +65,9 @@ export const Assets = () => {
 	}
 
 	const handleClickCopy = (e: MouseEvent) => {
-		// setCopy(selectedAccount.account)
-		// alert(`${copy}가 복사되었습니다.`)
+		setCopy(account.accountInfo.account)
+		alert(`${copy}가 복사되었습니다.`)
 	}
-
-	// const searchAccount = async () => {
-	// 	try {
-	// 		const { data } = await request.get('/allWallet')
-	// 		dispatch(getAccounts(data.accountsList))
-	// 	} catch (e) {
-
-	// 	}
-	// }
-
-	// useEffect(() => {
-	// 	// searchAccount()
-	// 	if (accounts.length === 1) newAccount()
-	// }, [])
 
 	return (
 		<>

@@ -32,6 +32,7 @@ class Wallet {
         }
 
         this.accounts.push(accounts)
+        console.log("현재 지갑서버에 존재하는 계정", this.accounts)
         return accounts
     }
 

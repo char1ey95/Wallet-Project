@@ -1,58 +1,10 @@
-import styled from "styled-components";
-import { QRCodeSVG } from "qrcode.react";
+import { PopupWrap, PopupHeader, PopupHeaderName, PopupContents, PopupContentWrap, PopupContent } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
+import { QRCodeSVG } from "qrcode.react";
 import { RootState } from "../../store/rootState";
-import { MouseEvent, useState } from "react";
 import request from "../../utils/request";
-
-const PopupWrap = styled.div`
-	position: absolute;
-	top: 3rem;
-	left: 2rem;
-	width: 20rem;
-    min-height: 6.5rem;
-	max-height: 12rem;
-	border: 1px solid #fff;
-	border-radius: 0.5rem;
-	background-color: #191919;
-	z-index: 999;
-`;
-
-const PopupHeader = styled.header`
-    display: flex;
-    align-items: center;
-	padding-left: 1rem;
-	width: 100%;
-	height: 3rem;
-	border-bottom: 1px solid #ffffff51;
-	box-sizing: border-box;
-`;
-
-const PopupHeaderName = styled.h1`
-	color: #fff;
-	font-family: ${props => props.theme.font};
-	font-size: 1.25rem;
-`;
-
-const PopupContents = styled.div`
-    width: 100%;
-    min-height: 3rem;
-    max-height: 9rem;
-    overflow: auto;
-`
-const PopupContentWrap = styled.div`
-    display: flex;
-    align-items: center;
-    padding-left: 1rem;
-    width: 100%;
-    height: 3rem;
-    box-sizing: border-box;
-`
-
-const PopupContent = styled.div`
-    margin: 0.5rem 1rem;
-    font-size: 1rem;
-`
+import { account } from "../../store/interface";
+import { SELECT_ACCOUNT_FAILURE, SELECT_ACCOUNT_REQUEST, SELECT_ACCOUNT_SUCCESS } from "../../store/account";
 
 interface PopupProps {
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -60,24 +12,23 @@ interface PopupProps {
 
 export const Popup: React.FC<PopupProps> = ({setOpen}) => {
     const { wallet } = useSelector((state: RootState) => state)
-    const [balance, setBalance] = useState({})
     const dispatch = useDispatch()
 
-    // const getBalance = async (account: account) => {
-    //     try {
-    //         const { data } = await request.get(`/balance/${account}`)
-    //         setBalance(data)
-    //     } catch (e) {
-            
-    //     }
-    // }
+    const getSelectedAccountBalance = async (account: account) => {
+            dispatch({type: SELECT_ACCOUNT_REQUEST})
+        try {
+            const { data } = await request.get(`/balance/${account}`)
+            dispatch({type: SELECT_ACCOUNT_SUCCESS, payload: data})
+        } catch (e) {
+            if( e instanceof Error)
+            dispatch({ type: SELECT_ACCOUNT_FAILURE, payload: e.message})
+        }
+    }
 
-    const handleClickSelectAccount = (e: MouseEvent) => {
-        const account = e.target as HTMLElement
-        const findValue = account.innerHTML.substring(0, 6)
-        const [selectOne] = wallet.wallet.filter((v) => v.account.substring(0, 6) === findValue)
-        // getBalance(account.account)
-        // dispatch(selectAccount())
+    const handleClickSelect= (e: React.MouseEvent<HTMLDivElement>) => {
+        const selectAccount = (e.target as HTMLDivElement).dataset.account
+        if( selectAccount === undefined ) return alert("사용할 수 없는 계정입니다.")
+        getSelectedAccountBalance(selectAccount)
         setOpen(false)
     }
 
@@ -86,13 +37,12 @@ export const Popup: React.FC<PopupProps> = ({setOpen}) => {
             <PopupHeader>
                 <PopupHeaderName>Accounts</PopupHeaderName>
             </PopupHeader>
-            <PopupContents onClick={handleClickSelectAccount}>
+            <PopupContents onClick={handleClickSelect}>
                 {wallet.wallet.map((account, index) => {
-                    if (index === 0 && account.account.length === 0) return <input type="hidden" key={index}></input>
                     return (
                         <PopupContentWrap key={index}>
                             <QRCodeSVG value={account.account} width="24" height="24"></QRCodeSVG>
-                            <PopupContent>{account.account.substring(0, 12)}...{account.account.substring(36, 40)}</PopupContent>
+                            <PopupContent data-account={account.account}>{account.account.substring(0, 12)}...{account.account.substring(36, 40)}</PopupContent>
                         </PopupContentWrap>
                     )
                 })}
