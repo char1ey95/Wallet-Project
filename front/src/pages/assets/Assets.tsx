@@ -69,15 +69,12 @@ export const Assets = () => {
 
 	const handleClickSend = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
-		console.log(receiver)
-		// if(receiver.length !== 40) return alert("계좌번호의 자릿수가 올바르지 않습니다.")
+		if(receiver.length !== 40) return alert("계좌번호의 자릿수가 올바르지 않습니다.")
 		setOpenSendPopup(true)
-		// request.post('/transaction', { sender: account.accountInfo.account, received: receiver, amount: 0 })
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setReceiver(e.target.value)
-		console.log(receiver)
 	}
 
 	const handleClickMine = (e: React.MouseEvent<HTMLButtonElement>) => {

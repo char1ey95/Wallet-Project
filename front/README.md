@@ -58,3 +58,13 @@ const request = async () => {
 - 계정 정보를 넘겨 채굴
 - 채굴시 balance 정보 업데이트
 - 채굴 블록 내용 화면에 Popup 띄우기?
+
+## 6. 트랜잭션 발동 후 송금할 계좌 input박스 비우기
+
+## 7. 로그인 구현하기
+- 니모닉을 입력받는다.
+- 비밀번호를 입력받는다.
+- 둘다 입력받아 해쉬화하여 데이터베이와 비교한다
+- 일치하는 accountsNumber를 가져온다.
+- accountsNumber 만큼 반복문을 돌려 wallet: [{}, {}, {}, ...]을 채워보낸다.
+- dispatch를 wallet에 하고, dispatch를 account에는 wallet의 첫번째 인덱스의 계정을 넣어준다.
