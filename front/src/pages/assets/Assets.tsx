@@ -16,9 +16,9 @@ import { account } from "../../store/interface"
 export const Assets = () => {
 	const { wallet, mnemonic, account } = useSelector((state: RootState) => state)
 	const [open, setOpen] = useState(false)
+	const [openSendPopup, setOpenSendPopup] = useState(false)
 	const [copy, setCopy] = useState(account.accountInfo.account)
 	const [receiver, setReceiver] = useState('')
-	const [amount, setAmount] = useState('')
 	// const [eth, setEth] = useState({
 	// 	isLoadding: true,
 	// 	isError: null,
@@ -70,8 +70,9 @@ export const Assets = () => {
 	const handleClickSend = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
 		console.log(receiver)
-		if(receiver.length !== 40) return alert("계좌번호의 자릿수가 올바르지 않습니다.")
-		request.post('/transaction', { sender: account.accountInfo.account, received: receiver, amount: 0 })
+		// if(receiver.length !== 40) return alert("계좌번호의 자릿수가 올바르지 않습니다.")
+		setOpenSendPopup(true)
+		// request.post('/transaction', { sender: account.accountInfo.account, received: receiver, amount: 0 })
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +106,7 @@ export const Assets = () => {
 	return (
 		<>
 			{open ? <Popup setOpen={setOpen} /> : <></>}
-			{<SendPopup />}
+			{openSendPopup? <SendPopup setOpen={setOpenSendPopup} receiver={receiver} getBalance={getSelectedAccountBalance}/> : <></>}
 			<AssetsHeaderWrap>
 				<AssetsHeaderContents>
 					<AssetsHeaderAccountsList onClick={handleClickOpen}>

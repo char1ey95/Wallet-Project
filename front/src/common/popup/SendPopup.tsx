@@ -1,66 +1,57 @@
-import styled from "styled-components"
-import { DarkInput } from "../input"
+import { SendPopupWrap, SendPopupSubjectWrap, SendPopupSubject, SendPopupInputWrap, SendPopupUnit, SendPopupConfirmWrap } from "./styled"
 import { ConfirmBtn } from "../button"
+import { DarkInput } from "../input"
+import React, { useState } from "react"
+import request from "../../utils/request"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store/rootState"
 
-export const SendPopupWrap = styled.div`
-    position: absolute;
-    top: 14.5rem;
-    left: 2rem;
-    width: 20rem;
-    height: 11rem;
-    background: ${props => props.theme.black};
-    border: 4px solid ${props => props.theme.white};
-    border-radius: 0.5rem;
-    z-index: 998;
-`
-export const SendPopupSubjectWrap = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    width: 100%;
-    height: 2.5rem;
-`
-export const SendPopupSubject = styled.h3`
-    width: 80%;
-    text-align: center;
-`
+interface SendPopupProps {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    receiver: string
+    getBalance: (account: string) => Promise<void>
+}
 
-export const SendPopupInputWrap = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 5rem;
-`
-export const SendPopupUnit = styled.h2`
-    margin-left: 2%;
-    width: 10%;
-`
-export const SendPopupConfirmWrap = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 3rem;
-    
-    & > button:nth-child(2) {
-        margin-left: 1rem;
+export const SendPopup = ({ setOpen, receiver, getBalance }: SendPopupProps) => {
+    const { account } = useSelector((state: RootState) => state)
+    const [amount, setAmount] = useState(0)
+
+    const handleClickOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        const button = e.target as HTMLButtonElement
+        if(button.innerHTML === "취소") return setOpen(false)
+        sendTransaction(account.accountInfo.account, receiver, amount)
+        getBalance(account.accountInfo.account)
+        setOpen(false)
     }
-`
 
-export const SendPopup = () => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            setAmount(parseInt(e.target.value))
+    }
+
+    const sendTransaction = async (sender: string, received: string, amount: number) => {
+        try {
+            if( account.accountInfo.balance < amount) return alert("잔액이 부족합니다.")
+            const { data } = await request.post('/transaction', { sender, received, amount })
+            if(data.transaction) alert("송금이 정상적으로 요청되었습니다.")
+        } catch (e) {
+            if( e instanceof Error)
+                alert("송금에 실패했습니다.")
+        }
+    }
+
     return (
         <SendPopupWrap>
             <SendPopupSubjectWrap>
                 <SendPopupSubject>얼마를 송금 하시겠습니까?</SendPopupSubject>
             </SendPopupSubjectWrap>
             <SendPopupInputWrap>
-                <DarkInput width={"60%"} height={"3rem"} />
+                <DarkInput onChange={handleChange} placeholder="금액을 입력해주세요" width={"60%"} height={"3rem"} />
                 <SendPopupUnit>ETH</SendPopupUnit>
             </SendPopupInputWrap>
             <SendPopupConfirmWrap>
-                <ConfirmBtn>확인</ConfirmBtn>
-                <ConfirmBtn>취소</ConfirmBtn>
+                <ConfirmBtn onClick={handleClickOpen}>확인</ConfirmBtn>
+                <ConfirmBtn onClick={handleClickOpen}>취소</ConfirmBtn>
             </SendPopupConfirmWrap>
         </SendPopupWrap>
     )

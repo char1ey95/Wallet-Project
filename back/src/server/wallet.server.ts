@@ -104,6 +104,7 @@ class WalletServer {
         try {
             const { sender, received, amount } = req.body
             const { publicKey, privateKey } = this.wallet.get(sender)
+            console.log(publicKey, privateKey)
             const receipt = this.wallet.sign({
                 sender: {
                     account: sender,
