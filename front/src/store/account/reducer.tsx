@@ -25,7 +25,7 @@ export const account = (state = initialState, action: { type: ActionType; payloa
 				...state,
 				isLoading: false,
 				isError: null,
-				accountInfo: {...action.payload.accountInfo}
+				accountInfo: {...action.payload}
 			}
 		case ACCOUNT_FAILURE:
 			return {

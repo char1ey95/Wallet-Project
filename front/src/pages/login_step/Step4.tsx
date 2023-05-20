@@ -1,12 +1,13 @@
 import { Step4_Form, StepContentWrap, StepContentSubject, StepContents, InputWrap, StepFormFooter } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, FormEvent } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { EllipseBtn } from "../../common/button";
 import { DarkInput } from "../../common/input";
 import { RootState } from "../../store/rootState";
-import { WALLET_FAILURE, WALLET_SUCCESS } from "../../store/wallet";
+import { CREATE_WALLET_FAILURE, CREATE_WALLET_SUCCESS } from "../../store/wallet";
 import request from "../../utils/request";
+import { ACCOUNT_SUCCESS } from "../../store/account";
 
 export const Step4 = () => {
     const { mnemonic } = useSelector((state: RootState) => state)
@@ -15,7 +16,7 @@ export const Step4 = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
             if (password.length <= 8) alert("비밀번호는 8글자 이상으로 입력해주세요.")
@@ -23,11 +24,12 @@ export const Step4 = () => {
 
             const { data } = await request.post('/join', { masterKey: mnemonic.masterKey, password })
             if (data.failed) return alert("천문학적 확률로 해시값이 중복되었습니다.")
-            dispatch({ type: WALLET_SUCCESS, payload: data.account })
+            dispatch({ type: CREATE_WALLET_SUCCESS, payload: data.account })
+            dispatch({ type: ACCOUNT_SUCCESS, payload: data.account })
             navigate('/assets')
         } catch (e) {
             if(e instanceof Error)
-            dispatch({type: WALLET_FAILURE, payload: e.message})
+            dispatch({type: CREATE_WALLET_FAILURE, payload: e.message})
         }
     };
 

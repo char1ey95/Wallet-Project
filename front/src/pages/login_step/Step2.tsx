@@ -16,13 +16,13 @@ export const Step2 = () => {
 
     const getMnemonic = async () => {
         try {
-            dispatch(requestMnemonic({ type: MNEMONIC_REQUEST }))
+            dispatch({ type: MNEMONIC_REQUEST })
             const { data } = await request.get('/mnemonic')
             // if (!(data as string[])) throw Error("니모닉 단어를 불러오지 못했습니다.")
-            dispatch(successMnemonic({ type: MNEMONIC_SUCCESS, payload: data }))
+            dispatch({ type: MNEMONIC_SUCCESS, payload: data })
         } catch (e) {
             if (e instanceof Error)
-                dispatch(failureMnemonic({ type: MNEMONIC_FAILURE, payload: e.message }))
+                dispatch({ type: MNEMONIC_FAILURE, payload: e.message })
         }
     }
 

@@ -7,3 +7,4 @@ export type publicKey = string
 export type Mnemonic = string
 export type MasterKey = string
 export type ActionType = string
+export type AccountsNumber = number

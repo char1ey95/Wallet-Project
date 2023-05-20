@@ -74,15 +74,28 @@ class WalletServer {
             const { masterKey, password } = req.body
             const hash = this.crypto.SHA256(masterKey + password)
             const result = await this.model.create({ signature: hash })
+            const { signature } = result.dataValues
             const account = this.wallet.createByMasterKey(masterKey, 1)
             account.balance = 0
-            console.log(account)
             if (!result.dataValues) throw new Error
-            res.json({ account }).status(201)
+            res.cookie("signature", signature).json({ account }).status(201)
         } catch (e) {
             if (e instanceof Error)
                 console.log(e.message)
             res.json({ failed: "실패" })
+        }
+    }
+
+    async postCreateAccount(req: Request, res: Response) {
+        try {
+            const { masterKey, index, signature } = req.body
+            const result = await this.model.update({ accountsNumber: index }, { where: { signature }})
+            if( result[0] === 0 ) throw new Error ("계정 생성에 실패했습니다.")
+            const account = this.wallet.createByMasterKey(masterKey, index)
+            res.json({ ...account })
+        } catch (e) {
+            if (e instanceof Error)
+                console.log(e.message)
         }
     }
 

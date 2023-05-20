@@ -59,9 +59,9 @@ interface PopupProps {
 }
 
 export const Popup: React.FC<PopupProps> = ({setOpen}) => {
-    // const { accounts, selectedAccount } = useSelector((state: RootState) => state.accounts)
-    // const [balance, setBalance] = useState({})
-    // const dispatch = useDispatch()
+    const { wallet } = useSelector((state: RootState) => state)
+    const [balance, setBalance] = useState({})
+    const dispatch = useDispatch()
 
     // const getBalance = async (account: account) => {
     //     try {
@@ -72,22 +72,22 @@ export const Popup: React.FC<PopupProps> = ({setOpen}) => {
     //     }
     // }
 
-    // const handleClickSelectAccount = (e: MouseEvent) => {
-    //     const account = e.target as HTMLElement
-    //     const findValue = account.innerHTML.substring(0, 6)
-    //     const [selectOne] = accounts.filter((v) => v.account.substring(0, 6) === findValue)
-    //     getBalance(selectOne.account)
-    //     // dispatch(selectAccount())
-    //     setOpen(false)
-    // }
+    const handleClickSelectAccount = (e: MouseEvent) => {
+        const account = e.target as HTMLElement
+        const findValue = account.innerHTML.substring(0, 6)
+        const [selectOne] = wallet.wallet.filter((v) => v.account.substring(0, 6) === findValue)
+        // getBalance(account.account)
+        // dispatch(selectAccount())
+        setOpen(false)
+    }
 
     return (
         <PopupWrap>
             <PopupHeader>
                 <PopupHeaderName>Accounts</PopupHeaderName>
             </PopupHeader>
-            {/* <PopupContents onClick={handleClickSelectAccount}>
-                {accounts.map((account, index) => {
+            <PopupContents onClick={handleClickSelectAccount}>
+                {wallet.wallet.map((account, index) => {
                     if (index === 0 && account.account.length === 0) return <input type="hidden" key={index}></input>
                     return (
                         <PopupContentWrap key={index}>
@@ -96,7 +96,7 @@ export const Popup: React.FC<PopupProps> = ({setOpen}) => {
                         </PopupContentWrap>
                     )
                 })}
-            </PopupContents> */}
+            </PopupContents>
         </PopupWrap>
     );
 };

@@ -1,4 +1,4 @@
-import { WALLET_FAILURE, WALLET_REQUEST, WALLET_SUCCESS } from "."
+import { CREATE_WALLET_FAILURE, CREATE_WALLET_REQUEST, CREATE_WALLET_SUCCESS } from "."
 import { ActionType, WalletState } from "../interface"
 
 const initialState: WalletState = {
@@ -11,25 +11,25 @@ const initialState: WalletState = {
 			publicKey: "",
 			balance: 0,
 		},
-	]
+	],
+	accountNumber: 1
 };
 
 export const wallet = (state = initialState, action: { type: ActionType; payload: WalletState }) => {
-	console.log("action::", action)
 	switch (action.type) {
-		case WALLET_REQUEST:
+		case CREATE_WALLET_REQUEST:
 			return {
 				...state,
 				isLoading: true
 			}
-		case WALLET_SUCCESS:
+		case CREATE_WALLET_SUCCESS:
 			return {
 				...state,
 				isLoading: false,
 				isError: null,
-				wallet: [...state.wallet, action.payload]
+				wallet: [action.payload]
 			}
-		case WALLET_FAILURE:
+		case CREATE_WALLET_FAILURE:
 			return {
 				...state,
 				isLoading: false,

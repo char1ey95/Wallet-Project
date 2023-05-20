@@ -16,8 +16,8 @@ export const Step3_SelectMnemonicWrap = styled.div`
     }
 
     & > .select {
-        background-color: #fff;
-        color: #000;
+        color: ${props => props.theme.white};
+        background-color: ${props => props.theme.main.color};
     }
 `
 
@@ -25,6 +25,7 @@ export const Step3_SelectMnemonic = styled.div`
     height: 2.5rem;
     text-align: center;
     line-height: 2.5rem;
+    color: ${props => props.theme.black};
     font-weight: 700;
     border-radius: 1rem;
     background-color: ${props => props.theme.white};

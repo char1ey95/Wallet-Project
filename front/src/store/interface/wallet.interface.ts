@@ -1,9 +1,10 @@
-import { error, loadding, Account  } from "."
+import { error, loadding, Account, AccountsNumber  } from "."
 
 export interface WalletState {
 	isLoading: loadding
 	isError: error
 	wallet: Account[]
+    accountNumber: AccountsNumber
 };
 
 export interface WalletData {
@@ -12,5 +13,5 @@ export interface WalletData {
 
 export interface WalletAction {
     type: string
-    payload?: WalletData | error
+    payload?: WalletData | Account | error
 }
