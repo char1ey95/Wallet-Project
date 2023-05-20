@@ -52,4 +52,9 @@ const request = async () => {
     2. 클릭된 계정의 account를 가지고 balance 정보를 업데이트
     3. 화면에 렌더
 
-## 5. 
+## 5. 채굴버튼
+
+- Mine 버튼 클릭
+- 계정 정보를 넘겨 채굴
+- 채굴시 balance 정보 업데이트
+- 채굴 블록 내용 화면에 Popup 띄우기?

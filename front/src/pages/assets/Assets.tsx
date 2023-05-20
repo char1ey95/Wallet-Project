@@ -1,9 +1,9 @@
 import { AssetsAmount, AssetsAmountsWrapper, AssetsFunctionsWrapper, AssetsHeaderAccountAddBtn, AssetsHeaderAccountBtnWarp, AssetsHeaderAccountCancelBtn, AssetsHeaderAccountCopyBtn, AssetsHeaderAccountsList, AssetsHeaderAccountsName, AssetsHeaderContents, AssetsHeaderWrap } from "./styled"
 import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_REQUEST, CREATE_ACCOUNT_SUCCESS } from "../../store/wallet"
-import { ACCOUNT_SUCCESS } from "../../store/account"
+import { ACCOUNT_SUCCESS, SELECT_ACCOUNT_FAILURE, SELECT_ACCOUNT_REQUEST, SELECT_ACCOUNT_SUCCESS } from "../../store/account"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { MouseEvent, useState } from "react"
+import React, { MouseEvent, useEffect, useState } from "react"
 import { QRCodeSVG } from "qrcode.react"
 import { Icon } from "@iconify/react"
 import { Popup } from "../../common/popup"
@@ -11,11 +11,18 @@ import request from "../../utils/request"
 import { RootState } from "../../store/rootState"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
+import { account } from "../../store/interface"
 
 export const Assets = () => {
 	const { wallet, mnemonic, account } = useSelector((state: RootState) => state)
 	const [open, setOpen] = useState(false)
 	const [copy, setCopy] = useState(account.accountInfo.account)
+	const [receiver, setReceiver] = useState('')
+	// const [eth, setEth] = useState({
+	// 	isLoadding: true,
+	// 	isError: null,
+	// 	data: account.accountInfo.balance
+	// })
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
@@ -38,9 +45,9 @@ export const Assets = () => {
 		}
 	}
 
-	const mineBlock = async () => {
+	const mineBlock = async (account: account) => {
 		try {
-			const { data } = await request.post('/mineBlock', { account: account.accountInfo.account })
+			const { data } = await request.post('/mineBlock', { account })
 			console.log(data)
 			alert('블럭이 생성되었습니다!')
 		} catch (e) {
@@ -48,23 +55,45 @@ export const Assets = () => {
 		}
 	}
 
-	const handleClickMine = (e: MouseEvent) => {
-		mineBlock()
+	const getSelectedAccountBalance = async (account: account) => {
+		dispatch({ type: SELECT_ACCOUNT_REQUEST })
+		try {
+			const { data } = await request.get(`/balance/${account}`)
+			dispatch({ type: SELECT_ACCOUNT_SUCCESS, payload: data })
+		} catch (e) {
+			if (e instanceof Error)
+				dispatch({ type: SELECT_ACCOUNT_FAILURE, payload: e.message })
+		}
 	}
 
-	const handleClickCancel = (e: MouseEvent) => {
+	const handleClickSend = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+	}
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setReceiver(prev => prev + e.target.value[e.target.value.length - 1])
+		console.log(receiver)
+	}
+
+	const handleClickMine = (e: React.MouseEvent<HTMLButtonElement>) => {
+		mineBlock(account.accountInfo.account)
+		getSelectedAccountBalance(account.accountInfo.account)
+		navigate('/assets')
+	}
+
+	const handleClickCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
 		navigate('/')
 	}
 
-	const handleClickOpen = (e: MouseEvent) => {
+	const handleClickOpen = (e: React.MouseEvent<HTMLDivElement>) => {
 		setOpen(!open)
 	}
 
-	const handleClickNewAccount = (e: MouseEvent) => {
+	const handleClickNewAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
 		createNewAccount()
 	}
 
-	const handleClickCopy = (e: MouseEvent) => {
+	const handleClickCopy = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setCopy(account.accountInfo.account)
 		alert(`${copy}가 복사되었습니다.`)
 	}
@@ -97,7 +126,7 @@ export const Assets = () => {
 				<AssetsAmount>{account.accountInfo.balance} ETH</AssetsAmount>
 			</AssetsAmountsWrapper>
 			<AssetsFunctionsWrapper>
-				<DarkInput placeholder='송금할 계좌를 입력해주세요' />
+				<DarkInput placeholder='송금할 계좌를 입력해주세요' onChange={handleChange} />
 				<EllipseBtn type="submit">Send</EllipseBtn>
 				<EllipseBtn type="button" onClick={handleClickMine}>Mine</EllipseBtn>
 			</AssetsFunctionsWrapper>
