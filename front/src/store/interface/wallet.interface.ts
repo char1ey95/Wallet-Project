@@ -4,7 +4,7 @@ export interface WalletState {
 	isLoading: loadding
 	isError: error
 	wallet: Account[]
-    accountNumber: AccountsNumber
+    accountsNumber: AccountsNumber
 };
 
 export interface WalletData {

@@ -10,6 +10,7 @@ import { RootState } from "../../store/rootState"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
 import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_REQUEST, CREATE_ACCOUNT_SUCCESS } from "../../store/wallet"
+import { ACCOUNT_SUCCESS } from "../../store/account"
 // import { requestWallet } from "../../store/wallet"
 
 export const Assets = () => {
@@ -21,12 +22,15 @@ export const Assets = () => {
 		try {
 			const { data } = await request.post('/createAccount', {
 				masterkey: mnemonic.masterKey,
-				index: wallet.accountNumber + 1,
+				index: wallet.accountsNumber + 1,
 				signature: document.cookie.split("=")[1]
 			})
-			console.log(data)
-			dispatch({ type: CREATE_ACCOUNT_SUCCESS, payload: "" })
+			if (data.error) throw new Error ( data.error )
+			data.accountsNumber = data.accountsNumber.accountsNumber
+			dispatch({ type: CREATE_ACCOUNT_SUCCESS, payload: data })
+			dispatch({ type: ACCOUNT_SUCCESS, payload: data.wallet })
 		} catch (e) {
+			alert("계정 생성에 실패했습니다.")
 			if (e instanceof Error)
 				dispatch({ type: CREATE_ACCOUNT_FAILURE, payload: e.message })
 		}
@@ -69,21 +73,12 @@ export const Assets = () => {
 	}
 
 	const handleClickNewAccount = (e: MouseEvent) => {
-		newAccount()
+		createNewAccount()
 	}
 
 	const handleClickCopy = (e: MouseEvent) => {
 		// setCopy(selectedAccount.account)
 		// alert(`${copy}가 복사되었습니다.`)
-	}
-
-	const newAccount = async () => {
-		try {
-			const { data } = await request.get('/wallet')
-			// dispatch(createAccount(data))
-		} catch (e) {
-			// dispatch()
-		}
 	}
 
 	// const searchAccount = async () => {

@@ -91,11 +91,12 @@ class WalletServer {
             const { masterKey, index, signature } = req.body
             const result = await this.model.update({ accountsNumber: index }, { where: { signature }})
             if( result[0] === 0 ) throw new Error ("계정 생성에 실패했습니다.")
+            const accountsNumber = await this.model.findOne({ where: { signature }, raw: true, nest: true, attributes: ["accountsNumber"] })
             const account = this.wallet.createByMasterKey(masterKey, index)
-            res.json({ ...account })
+            res.json({ wallet: { ...account, balance: 0 }, accountsNumber })
         } catch (e) {
             if (e instanceof Error)
-                console.log(e.message)
+                res.json({ error: e.message })
         }
     }
 

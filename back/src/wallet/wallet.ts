@@ -21,7 +21,7 @@ class Wallet {
     }
 
     public createByMasterKey(masterKey: MasterKey, index: KeyIndex): Accounts {
-        const privateKey = this.digitalSignature.createPrivateKeyByMasterKey(masterKey + index)
+        const privateKey = this.digitalSignature.createPrivateKeyByMasterKey(masterKey + index.toString())
         const publicKey = this.digitalSignature.createPublicKey(privateKey)
         const account = this.digitalSignature.createAccount(publicKey)
 
