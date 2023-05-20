@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 import React, { MouseEvent, useEffect, useState } from "react"
 import { QRCodeSVG } from "qrcode.react"
 import { Icon } from "@iconify/react"
-import { Popup } from "../../common/popup"
+import { Popup, SendPopup } from "../../common/popup"
 import request from "../../utils/request"
 import { RootState } from "../../store/rootState"
 import { EllipseBtn } from "../../common/button"
@@ -18,6 +18,7 @@ export const Assets = () => {
 	const [open, setOpen] = useState(false)
 	const [copy, setCopy] = useState(account.accountInfo.account)
 	const [receiver, setReceiver] = useState('')
+	const [amount, setAmount] = useState('')
 	// const [eth, setEth] = useState({
 	// 	isLoadding: true,
 	// 	isError: null,
@@ -67,11 +68,14 @@ export const Assets = () => {
 	}
 
 	const handleClickSend = (e: React.MouseEvent<HTMLButtonElement>) => {
-
+		e.preventDefault()
+		console.log(receiver)
+		if(receiver.length !== 40) return alert("계좌번호의 자릿수가 올바르지 않습니다.")
+		request.post('/transaction', { sender: account.accountInfo.account, received: receiver, amount: 0 })
 	}
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setReceiver(prev => prev + e.target.value[e.target.value.length - 1])
+		setReceiver(e.target.value)
 		console.log(receiver)
 	}
 
@@ -101,6 +105,7 @@ export const Assets = () => {
 	return (
 		<>
 			{open ? <Popup setOpen={setOpen} /> : <></>}
+			{<SendPopup />}
 			<AssetsHeaderWrap>
 				<AssetsHeaderContents>
 					<AssetsHeaderAccountsList onClick={handleClickOpen}>
@@ -127,7 +132,7 @@ export const Assets = () => {
 			</AssetsAmountsWrapper>
 			<AssetsFunctionsWrapper>
 				<DarkInput placeholder='송금할 계좌를 입력해주세요' onChange={handleChange} />
-				<EllipseBtn type="submit">Send</EllipseBtn>
+				<EllipseBtn type="submit" onClick={handleClickSend}>Send</EllipseBtn>
 				<EllipseBtn type="button" onClick={handleClickMine}>Mine</EllipseBtn>
 			</AssetsFunctionsWrapper>
 		</>

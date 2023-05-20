@@ -73,17 +73,17 @@ export const StepForm = ({ step, previous }: Step_Num) => {
             steps.push(<StepFormHeaderStep key={i} />)
         }
         for (let i = 0; i < 4 - step; i++) {
-            steps.push(<StepFormHeaderUnStep key={i} />)
+            steps.push(<StepFormHeaderUnStep key={4-i} />)
         }
         return steps
     };
 
     const renderStepComponent = (step: number) => {
         const steps = []
-        if(step === 1) steps.push(<Step1 />)
-        if(step === 2) steps.push(<Step2 />)
-        if(step === 3) steps.push(<Step3 />)
-        if(step === 4) steps.push(<Step4 />)
+        if(step === 1) steps.push(<Step1 key={step}/>)
+        if(step === 2) steps.push(<Step2 key={step}/>)
+        if(step === 3) steps.push(<Step3 key={step}/>)
+        if(step === 4) steps.push(<Step4 key={step}/>)
         return steps
     }
 
@@ -99,7 +99,6 @@ export const StepForm = ({ step, previous }: Step_Num) => {
                 </StepFormHeaderArrow>
                 <StepFormHeaderStepWrap>
                     {renderStep()}
-                    {/* {renderUnStep()} */}
                 </StepFormHeaderStepWrap>
             </StepFormHeader>
             <StepFormContentWrap>
