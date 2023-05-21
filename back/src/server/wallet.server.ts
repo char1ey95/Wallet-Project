@@ -69,6 +69,19 @@ class WalletServer {
         }
     }
 
+    async postLogin(req: Request, res: Response) {
+        try {
+            const { masterKey, password } = req.body
+            const hash = this.crypto.SHA256(masterKey + password)
+            const result = await this.model.findOne({ where: { signature: hash }, nest: true, raw: true })
+            const wallet = this.wallet.recreateByMasterKey(masterKey, result)
+            res.json({ wallet })
+        } catch (e) {
+            if (e instanceof Error) res.status(500).send(e.message)
+            res.status(500)
+        }
+    }
+
     async postJoin(req: Request, res: Response) {
         try {
             const { masterKey, password } = req.body
@@ -89,8 +102,8 @@ class WalletServer {
     async postCreateAccount(req: Request, res: Response) {
         try {
             const { masterKey, index, signature } = req.body
-            const result = await this.model.update({ accountsNumber: index }, { where: { signature }})
-            if( result[0] === 0 ) throw new Error ("계정 생성에 실패했습니다.")
+            const result = await this.model.update({ accountsNumber: index }, { where: { signature } })
+            if (result[0] === 0) throw new Error("계정 생성에 실패했습니다.")
             const accountsNumber = await this.model.findOne({ where: { signature }, raw: true, nest: true, attributes: ["accountsNumber"] })
             const account = this.wallet.createByMasterKey(masterKey, index)
             res.json({ wallet: { ...account, balance: 0 }, accountsNumber })
@@ -138,7 +151,7 @@ class WalletServer {
             const masterKey = this.wallet.getMasterKey(mnemonic)
             res.json({ mnemonics, masterKey })
         } catch (e) {
-            
+
         }
     }
 }

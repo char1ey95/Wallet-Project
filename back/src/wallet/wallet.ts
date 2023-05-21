@@ -36,6 +36,19 @@ class Wallet {
         return accounts
     }
 
+    public recreateByMasterKey(masterKey: MasterKey, user: any): Accounts[] {
+        const wallet = []
+        const { accountsNumber } = user
+        for(let i = 1; i <= accountsNumber; i++){
+            const accounts = this.createByMasterKey(masterKey, i)
+            wallet.push(accounts)
+        }
+
+        this.accounts.push(...wallet)
+        console.log("현재 지갑서버에 존재하는 계정", this.accounts)
+        return wallet
+    }
+
     public getMnemonic(): string{
         const mnemonic = this.digitalSignature.createMnemonic()
         return mnemonic
