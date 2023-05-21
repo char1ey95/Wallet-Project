@@ -10,7 +10,7 @@ class DigitalSignature {
     constructor(private readonly crypto: CryptoModule) {}
 
     createMnemonic() {
-        bip39.setDefaultWordlist("korean")
+        // bip39.setDefaultWordlist("korean")
         const bits = 128
         const randomBytes = require("crypto").randomBytes(bits/8)
         const entropy = randomBytes.toString("hex")

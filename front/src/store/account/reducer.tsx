@@ -31,7 +31,7 @@ export const account = (state = initialState, action: { type: ActionType; payloa
 			return {
 				...state,
 				isLoading: false,
-				isError: action.payload.isError,
+				isError: action.payload,
 			}
 		case SELECT_ACCOUNT_REQUEST:
 			return {
@@ -49,7 +49,7 @@ export const account = (state = initialState, action: { type: ActionType; payloa
 			return {
 				...state,
 				isLoading: false,
-				isError: action.payload.isError,
+				isError: action.payload,
 			}
 		default:
 			return state;

@@ -36,9 +36,8 @@ class Wallet {
         return accounts
     }
 
-    public recreateByMasterKey(masterKey: MasterKey, user: any): Accounts[] {
+    public recreateByMasterKey(masterKey: MasterKey, accountsNumber: number): Accounts[] {
         const wallet = []
-        const { accountsNumber } = user
         for(let i = 1; i <= accountsNumber; i++){
             const accounts = this.createByMasterKey(masterKey, i)
             wallet.push(accounts)
@@ -55,6 +54,7 @@ class Wallet {
     }
 
     public getMasterKey(mnemonic: string): string {
+        console.log(mnemonic)
         const masterKey = this.digitalSignature.createMasterKey(mnemonic)
         return masterKey
     }

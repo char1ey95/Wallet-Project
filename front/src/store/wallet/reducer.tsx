@@ -1,4 +1,4 @@
-import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_REQUEST, CREATE_ACCOUNT_SUCCESS, CREATE_WALLET_FAILURE, CREATE_WALLET_REQUEST, CREATE_WALLET_SUCCESS } from "."
+import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_REQUEST, CREATE_ACCOUNT_SUCCESS, CREATE_WALLET_FAILURE, CREATE_WALLET_REQUEST, CREATE_WALLET_SUCCESS, GET_WALLET_FAILURE, GET_WALLET_REQUEST, GET_WALLET_SUCCESS } from "."
 import { ActionType, WalletState } from "../interface"
 
 const initialState: WalletState = {
@@ -33,7 +33,7 @@ export const wallet = (state = initialState, action: { type: ActionType; payload
 			return {
 				...state,
 				isLoading: false,
-				isError: action.payload.isError,
+				isError: action.payload,
 			}
 		case CREATE_ACCOUNT_REQUEST:
 			return {
@@ -52,7 +52,26 @@ export const wallet = (state = initialState, action: { type: ActionType; payload
 			return {
 				...state,
 				isLoading: false,
-				isError: action.payload.isError,
+				isError: action.payload,
+			}
+		case GET_WALLET_REQUEST:
+			return {
+				...state,
+				isLoading: true
+			}
+		case GET_WALLET_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				isError: null,
+				wallet: [...action.payload.wallet],
+				accountsNumber: action.payload.accountsNumber
+			}
+		case GET_WALLET_FAILURE:
+			return {
+				...state,
+				isLoading: false,
+				isError: action.payload,
 			}
 		default:
 			return state;

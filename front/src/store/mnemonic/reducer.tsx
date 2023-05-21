@@ -28,7 +28,7 @@ export const mnemonic = (state = initialState, action: { type: ActionType; paylo
 			return {
 				...state,
 				isLoading: false,
-				isError: action.payload.isError,
+				isError: action.payload,
 			}
 		case POST_MNEMONIC_REQUEST:
 			return {

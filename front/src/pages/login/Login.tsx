@@ -3,20 +3,26 @@ import { Icon } from "@iconify/react"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
 import React, { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../store/rootState"
 import request from "../../utils/request"
+import { GET_WALLET_FAILURE, GET_WALLET_REQUEST, GET_WALLET_SUCCESS } from "../../store/wallet"
+import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
     const { mnemonic } = useSelector((state: RootState) => state)
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const postLogin = async (password: string) => {
+        dispatch({ type: GET_WALLET_REQUEST })
         try {
-            const { data } = await request.post('/login', { masterKey: mnemonic.masterKey, password: password})
-            console.log(data)
-        } catch (error) {
-            
+            const { data } = await request.post('/login', { masterKey: mnemonic.masterKey, password: password })
+            dispatch({ type: GET_WALLET_SUCCESS, payload: data })
+        } catch (e) {
+            if (e instanceof Error)
+                dispatch({ type: GET_WALLET_FAILURE, payload: e.message })
         }
     }
 
@@ -29,7 +35,9 @@ export const Login = () => {
     }
 
     const handleClickLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         postLogin(password)
+        navigate('/assets')
     }
 
 

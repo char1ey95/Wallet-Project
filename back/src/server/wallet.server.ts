@@ -69,13 +69,19 @@ class WalletServer {
         }
     }
 
+    assistLogin(result: any){
+        const { signature, accountsNumber } = result
+        return { signature, accountsNumber }
+    }
+
     async postLogin(req: Request, res: Response) {
         try {
             const { masterKey, password } = req.body
             const hash = this.crypto.SHA256(masterKey + password)
             const result = await this.model.findOne({ where: { signature: hash }, nest: true, raw: true })
-            const wallet = this.wallet.recreateByMasterKey(masterKey, result)
-            res.json({ wallet })
+            const { signature, accountsNumber } = this.assistLogin(result)
+            const wallet = this.wallet.recreateByMasterKey(masterKey, accountsNumber)
+            res.cookie("signature", signature).json({ wallet, accountsNumber })
         } catch (e) {
             if (e instanceof Error) res.status(500).send(e.message)
             res.status(500)
@@ -147,11 +153,12 @@ class WalletServer {
     async postMnemonic(req: Request, res: Response) {
         try {
             const { mnemonics } = req.body
-            const mnemonic = mnemonics.join(' ')
+            const mnemonic = mnemonics.join(" ")
             const masterKey = this.wallet.getMasterKey(mnemonic)
             res.json({ mnemonics, masterKey })
         } catch (e) {
-
+            if (e instanceof Error) res.status(500).send(e.message)
+            res.status(500)
         }
     }
 }
