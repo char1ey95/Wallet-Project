@@ -1,5 +1,10 @@
 import styled from "styled-components"
 
+export const Step1_Contents_Wrap = styled.form`
+    width: 100%;
+    height: 100%;
+`
+
 export const Step1_Contents = styled.div`
     display: grid;
     grid-template-rows: repeat(6);
@@ -15,7 +20,8 @@ export const Step1_Contents = styled.div`
 export const Step1_ContentsInput = styled.input`
 	padding: 0.5rem 1rem;
 	height: 2.5rem;
-	font-size: 1rem;
+    text-align: center;
+	font-size: 0.9rem;
     font-weight: 700;
 	color: ${props => props.theme.black};
 	background-color: ${props => props.theme.white};

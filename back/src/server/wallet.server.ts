@@ -130,6 +130,17 @@ class WalletServer {
             res.status(500)
         }
     }
+
+    async postMnemonic(req: Request, res: Response) {
+        try {
+            const { mnemonics } = req.body
+            const mnemonic = mnemonics.join(' ')
+            const masterKey = this.wallet.getMasterKey(mnemonic)
+            res.json({ mnemonics, masterKey })
+        } catch (e) {
+            
+        }
+    }
 }
 
 export default WalletServer

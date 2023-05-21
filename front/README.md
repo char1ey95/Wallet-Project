@@ -70,3 +70,8 @@ const request = async () => {
 - 일치하는 accountsNumber를 가져온다.
 - accountsNumber 만큼 반복문을 돌려 wallet: [{}, {}, {}, ...]을 채워보낸다.
 - dispatch를 wallet에 하고, dispatch를 account에는 wallet의 첫번째 인덱스의 계정을 넣어준다.
+
+### Step_1 페이지
+- 니모닉 단어 받기
+- back 서버에 니모닉 제출 (post, /createMasterKey)
+- MasterKey와 니모닉을 받아서 mnemonic에 전역상태로 저장시킨다.

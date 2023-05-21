@@ -1,5 +1,5 @@
 import { StepContentWrap, StepContentSubject, StepContents, Step2_MnemonicWrap, StepFormFooter, Step2_Mnemonic } from "./styled"
-import { MNEMONIC_FAILURE, MNEMONIC_REQUEST, MNEMONIC_SUCCESS, failureMnemonic, requestMnemonic, successMnemonic } from "../../store/mnemonic"
+import { MNEMONIC_FAILURE, MNEMONIC_REQUEST, MNEMONIC_SUCCESS } from "../../store/mnemonic"
 import { useSelector, useDispatch } from "react-redux"
 import { MouseEvent, useEffect } from "react"
 import { useNavigate } from "react-router-dom"

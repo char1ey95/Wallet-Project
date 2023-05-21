@@ -3,12 +3,16 @@ import { Icon } from "@iconify/react"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
 import React from "react"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store/rootState"
 
 export const Login = () => {
-
+    const { mnemonic } = useSelector((state: RootState) => state)
     const handleClickForgot = (e: React.MouseEvent) => {
         alert("어쩔수 없습니다..")
     }
+
+    
 
     return (
         <>
