@@ -5,6 +5,8 @@ import DigitalSignature from '@wallet/digitalSignature'
 import Wallet from '@wallet/wallet'
 import { Request, Response } from 'express';
 import { AxiosInstance } from 'axios'
+import { ModelCtor, Model } from "sequelize"
+import sequelize from "../../model";
 
 describe('WalletServer', () => {
     let crypto: CryptoModule
@@ -12,13 +14,15 @@ describe('WalletServer', () => {
     let wallet: Wallet
     let axios: AxiosInstance
     let walletServer: WalletServer
+    let model: ModelCtor<Model<any, any>>
 
     beforeAll(() => {
         crypto = new CryptoModule()
         digitalSignature = new DigitalSignature(crypto)
         wallet = new Wallet(digitalSignature)
+        model = sequelize.models.WalletModel
         axios = request
-        walletServer = new WalletServer(wallet, axios)
+        walletServer = new WalletServer(wallet, axios, crypto, model)
     })
     describe('getWallet', () => {
         it('계정을 잘 반환하는가?', async () => {

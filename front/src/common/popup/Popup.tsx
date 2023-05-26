@@ -5,15 +5,13 @@ import { RootState } from "../../store/rootState";
 import request from "../../utils/request";
 import { account } from "../../store/interface";
 import { SELECT_ACCOUNT_FAILURE, SELECT_ACCOUNT_REQUEST, SELECT_ACCOUNT_SUCCESS } from "../../store/account";
-import { LoadingCircle } from "../loading";
-import { ErrorPage } from "../error";
 
 interface PopupProps {
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const Popup: React.FC<PopupProps> = ({setOpen}) => {
-    const { wallet, account } = useSelector((state: RootState) => state)
+    const { wallet } = useSelector((state: RootState) => state)
     const dispatch = useDispatch()
 
     const getSelectedAccountBalance = async (account: account) => {
@@ -34,8 +32,6 @@ export const Popup: React.FC<PopupProps> = ({setOpen}) => {
         setOpen(false)
     }
 
-    if( account.isLoading ) return <LoadingCircle />
-    if( account.isError ) return <ErrorPage code={404} />
     return (
         <PopupWrap>
             <PopupHeader>

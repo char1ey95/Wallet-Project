@@ -1,5 +1,5 @@
 import CryptoModule from '@crypto/crypto'
-import { Receipt, Sender } from '@wallet/wallet.interface'
+import { Receipt } from '@wallet/wallet.interface'
 
 describe('CryptoModule', () => {
     let cryptoModule: CryptoModule
@@ -36,10 +36,11 @@ describe('CryptoModule', () => {
             expect(receiptHash.length).toBe(64)
         })
 
-        // it('영수증의 publicKey의 길이가 올바르지 않으면 에러를 출력하는가', () => {
-        //     receipt.sender.publicKey = 'fcbe6e751b3c9877b331708b1a34a9bf1a81b1b6ffcb68d97c957b3c9'
-        //     const receiptHash = cryptoModule.createReceiptHash(receipt)
-        //     console.log(receiptHash)
-        // })
+        it('영수증의 publicKey의 길이가 올바르지 않으면 에러를 출력하는가', () => {
+            receipt.sender.publicKey = '0000'
+            expect(() => {
+                cryptoModule.createReceiptHash(receipt)
+            }).toThrow(Error)
+        })
     })
 })

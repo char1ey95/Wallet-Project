@@ -3,7 +3,7 @@ import { CREATE_ACCOUNT_FAILURE, CREATE_ACCOUNT_REQUEST, CREATE_ACCOUNT_SUCCESS 
 import { ACCOUNT_SUCCESS, SELECT_ACCOUNT_FAILURE, SELECT_ACCOUNT_REQUEST, SELECT_ACCOUNT_SUCCESS } from "../../store/account"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import React, { MouseEvent, useEffect, useState } from "react"
+import React, { useState } from "react"
 import { QRCodeSVG } from "qrcode.react"
 import { Icon } from "@iconify/react"
 import { Popup, SendPopup } from "../../common/popup"
@@ -12,6 +12,8 @@ import { RootState } from "../../store/rootState"
 import { EllipseBtn } from "../../common/button"
 import { DarkInput } from "../../common/input"
 import { account } from "../../store/interface"
+import { ErrorPage } from "../../common/error"
+import { LoadingCircle } from "../../common/loading"
 
 export const Assets = () => {
 	const { wallet, mnemonic, account } = useSelector((state: RootState) => state)
@@ -100,6 +102,8 @@ export const Assets = () => {
 		alert(`${copy}가 복사되었습니다.`)
 	}
 
+	if( account.isLoading ) return <LoadingCircle />
+    if( account.isError ) return <ErrorPage code={404} />
 	return (
 		<>
 			{open ? <Popup setOpen={setOpen} /> : <></>}
